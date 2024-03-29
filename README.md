@@ -7,4 +7,4 @@ The datasets folder provides the model code repository classified as text genera
 
 Three examples of extracting information through `huggingface_hub` are stored in the script folder.
 
-Jamarpaul is an **anonymous account** for the COLM submission.
+Jamarpaul is an **anonymous account** for the COLM submission, the paper title is: The Socio-Technical Impacts of Open Source Large Language Models: An Exploratory Study
