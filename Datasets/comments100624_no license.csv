@@ -1,0 +1,2023 @@
+replier,post_time,type,repo,comment
+bingw5,2024-03-21 09:10:42+00:00,comment,Qwen/Qwen-VL-Chat,"VL模型先完成文字识别，然后再调用LLM生成答案。Qwen-vl 中文识别能力不错，但这么小的模型显然不可能有很强的数学和推理能力。你可以试试他们的Qwen-VL-Max, 但这个模型不开源的。
+"
+weiminw,2024-03-21 09:50:47+00:00,comment,Qwen/Qwen-VL-Chat,"> VL模型先完成文字识别，然后再调用LLM生成答案。Qwen-vl 中文识别能力不错，但这么小的模型显然不可能有很强的数学和推理能力。你可以试试他们的Qwen-VL-Max, 但这个模型不开源的。
+
+我使用的query“图片22题讲了什么内容.” 目的就是希望VL模型把识别的内容整理出来， 但是它回复的和试卷上的文字一点关系都没有，我不是让它做题，我也知道它做不了题。 是我的prompt不对么， 你有什么好的建议么，如何让开源的VL识别出文字并输出？"
+bingw5,2024-03-21 09:56:59+00:00,comment,Qwen/Qwen-VL-Chat,我测试过这个模型的OCR能力。我的提示词是“请识别图上的文字，不要加任何解读和评论。”同时，把temperature 的值调低一点，我设置成了0.2
+william0014,2024-03-21 12:13:29+00:00,comment,Qwen/Qwen-VL-Chat,"> 我测试过这个模型的OCR能力。我的提示词是“请识别图上的文字，不要加任何解读和评论。”同时，把temperature 的值调低一点，我设置成了0.2
+
+好的, 非常感谢,我试一下.
+"
+weiminw,2024-03-22 09:13:06+00:00,comment,Qwen/Qwen-VL-Chat,按照你的prompt测试了一下，还是不能获取图片里面完整的文本内容。我感觉这个VL-CHAT主要作用就是看这个图片大概是什么， 涉及到里面的文字，大部分都识别不对，是我使用姿势不对么？
+xjs521,2024-03-01 01:17:46+00:00,comment,Qwen/Qwen-VL-Chat,
+BabyChou,2024-02-28 08:06:27+00:00,comment,Qwen/Qwen-VL-Chat,This is in the visual.py file under the class Resampler
+charry2000,2023-09-06 15:32:42+00:00,comment,Qwen/Qwen-VL-Chat,"Thanks for your work. I think the vision.bin file is the visual parts, How to  fine tuning this model and inference?"
+JosephusCheung,2023-09-06 15:46:37+00:00,comment,Qwen/Qwen-VL-Chat,"> Thanks for your work. I think the vision.bin file is the visual parts, How to  fine tuning this model and inference?
+
+The structure of the LLM part is identical to that of LLaMA, allowing you to utilize HF transformers with the LlamaForCausalLM. For the vision part, you can utilize visual.py from the original Qwen-VL repository. This allows you to convert images into LM input embeddings. You can then manually concatenate these with your text instruction input for the LLM.
+
+It is quite obvious I think."
+nlpcvcode,2023-09-26 18:17:11+00:00,comment,Qwen/Qwen-VL-Chat,"> https://huggingface.co/JosephusCheung/Qwen-VL-LLaMAfied-7B-Chat
+> 
+> Similar to [LLaMAfied Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat/discussions/13), the visual parts and LLM are separated, and LLM is restructured and recalibrated into the standard LLaMA/LLaMA2 format (with GPT-2 tokenizer). It can be used with any tools that are compatible with LLaMA, such as stream output, llama.cpp quantization, and so on.
+
+how to use?"
+JosephusCheung,2023-09-26 18:38:54+00:00,comment,Qwen/Qwen-VL-Chat,"> > https://huggingface.co/JosephusCheung/Qwen-VL-LLaMAfied-7B-Chat
+> > 
+> > Similar to [LLaMAfied Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat/discussions/13), the visual parts and LLM are separated, and LLM is restructured and recalibrated into the standard LLaMA/LLaMA2 format (with GPT-2 tokenizer). It can be used with any tools that are compatible with LLaMA, such as stream output, llama.cpp quantization, and so on.
+> 
+> how to use?
+
+Use LLM the way you use LLaMA-2, and use visual.py from Qwen-VL for VL part, which is obvious for literate people."
+nlpcvcode,2023-09-27 03:27:59+00:00,comment,Qwen/Qwen-VL-Chat,"> > > https://huggingface.co/JosephusCheung/Qwen-VL-LLaMAfied-7B-Chat
+> > > 
+> > > Similar to [LLaMAfied Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat/discussions/13), the visual parts and LLM are separated, and LLM is restructured and recalibrated into the standard LLaMA/LLaMA2 format (with GPT-2 tokenizer). It can be used with any tools that are compatible with LLaMA, such as stream output, llama.cpp quantization, and so on.
+> > 
+> > how to use?
+> 
+> Use LLM the way you use LLaMA-2, and use visual.py from Qwen-VL for VL part, which is obvious for literate people.
+
+This is difficult for me,  i don't know how to merge two models for inferencing. could you give me some code examples? Thanks!"
+riddlechen,2023-12-30 07:13:06+00:00,comment,Qwen/Qwen-VL-Chat,"> https://huggingface.co/JosephusCheung/Qwen-VL-LLaMAfied-7B-Chat
+> 
+> Similar to [LLaMAfied Qwen-7B-Chat](https://huggingface.co/Qwen/Qwen-7B-Chat/discussions/13), the visual parts and LLM are separated, and LLM is restructured and recalibrated into the standard LLaMA/LLaMA2 format (with GPT-2 tokenizer). It can be used with any tools that are compatible with LLaMA, such as stream output, llama.cpp quantization, and so on.
+
+Great work, thank you very much."
+simonJJJ,2023-08-23 16:17:24+00:00,comment,Qwen/Qwen-VL-Chat,"Hi @JosephusCheung, thanks for your point. We have fine-tuned the LLM during the training of Qwen-VL, so the LLM weights are different from Qwen-7B & Chat. There is the potential that the fine-tuned LLM has degraded. We will examine the benchmark test results of the fine-tuned LLM sonn."
+JosephusCheung,2023-08-23 16:20:46+00:00,comment,Qwen/Qwen-VL-Chat,"If possible, I would like to consider incorporating these changes by using adapters for on-the-fly loading during image reasoning only, in order to modify the attention weights of LLM. I believe that from a practical standpoint, this can be done without affecting the effectiveness of text reasoning. If there is no official implementation available, I would also consider implementing it myself."
+simonJJJ,2023-08-23 16:29:18+00:00,comment,Qwen/Qwen-VL-Chat,"Sure! You can use LoRA or other adapter techniques. Due to the computation budget, we don't implement it. You can try it yourself and feel free to contact us with any issue."
+simonJJJ,2023-08-23 08:00:39+00:00,comment,Qwen/Qwen-VL-Chat,可能是由于中文字体的原因，可以将SimSun.ttf字体下载到本地后使用。
+YaTharThShaRma999,2023-08-30 15:13:12+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,This comment has been hidden
+TinyPixel,2023-08-21 11:57:22+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"Just load the model and do
+model.push_to_hub("""", max_shard_size=""2000MB"", use_auth_token=True)
+Also push the tokenizer
+tokenizer.push_to_hub("""", use_auth_token=True)"
+TinyPixel,2023-08-19 00:55:53+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"Use this notebook
+https://colab.research.google.com/drive/13IJGf0n8NyBahROCCBZApNE1cT2rdiSC?usp=sharing"
+MonishMeher,2023-08-19 10:22:43+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"How do I know for sure its giving output from my trained model? Like the replies are somewhat similar but do not adhere exactly to the dataset, the dataset was just 100rows I know it very less but is there any way to know for sure?
+Thankyou Already for your help"
+Thang199x,2023-08-19 10:51:12+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"Im struggling with the same situation as you are. Hope someone help us. I expand my dataset to 300 rows but Im not sure if it is enough
+"
+TinyPixel,2023-08-15 02:50:37+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"I usually use this colab notebook
+https://colab.research.google.com/drive/1Uk9eWkUNR-KxRJL4tkgryIXDKUpMGG6j?authuser=4#scrollTo=_kbS7nRxcMt7
+
+I think it's working
+
+But try using max_seq_length less "
+Deepjyoti120,2023-08-15 02:59:47+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"Here is me cmd
+!autotrain llm --train --project_name AssamAiModelTrain --model TinyPixel/Llama-2-7B-bf16-sharded --data_path Deepjyoti120/AssameseDataTrain --use_peft --use_int4 --learning_rate 2e-4 --gradient_accumulation_steps 1 --train_batch_size 2 --num_train_epochs 3 --trainer sft --model_max_length 2048 --block_size 2048 --push_to_hub --repo_id myrepo
+and Thank you for 
+https://colab.research.google.com/drive/1Uk9eWkUNR-KxRJL4tkgryIXDKUpMGG6j?authuser=4#scrollTo=_kbS7nRxcMt7
+but i am not able to access
+
+"
+TinyPixel,2023-08-15 04:33:31+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"use --block_size 1024 or less because dataset is small 
+
+https://colab.research.google.com/drive/19wL4kEWPRPJfYb1Idxsn7RyypWrUaaI7?usp=sharing"
+Deepjyoti120,2023-08-15 05:00:52+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"Thank you very much 
+but i got error 
+--------------
+> INFO    creating trainer
+{'loss': 1.0515, 'learning_rate': 0.0002, 'epoch': 0.5}
+{'loss': 1.0515, 'learning_rate': 0.00016, 'epoch': 1.0}
+{'loss': 0.9777, 'learning_rate': 0.00012, 'epoch': 1.5}
+{'loss': 0.9135, 'learning_rate': 8e-05, 'epoch': 2.0}
+{'loss': 0.8651, 'learning_rate': 4e-05, 'epoch': 2.5}
+{'loss': 0.8316, 'learning_rate': 0.0, 'epoch': 3.0}
+{'train_runtime': 152.9057, 'train_samples_per_second': 0.078, 'train_steps_per_second': 0.039, 'train_loss': 0.9484844207763672, 'epoch': 3.0}
+100% 6/6 [02:32<00:00, 25.48s/it]
+> INFO    Finished training, saving model...
+> INFO    Merging adapter weights...
+> INFO    Loading adapter...
+Loading checkpoint shards:  57% 8/14 [00:45<00:34,  5.73s/it]^C
+-----------
+always end with ""Loading checkpoint shards:  57% 8/14 [00:45<00:34,  5.73s/it]^C"" in colab
+any idea?
+![Screenshot 2023-08-15 at 10.31.30 AM.png](https://cdn-uploads.huggingface.co/production/uploads/64bfe48b1546c867f9ce5376/57jDWqRCIR4Ts8VCh0oDW.png)
+"
+TinyPixel,2023-08-15 05:52:10+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"The free colab goes out of memory for merging
+You should push checkpoint-6 folder to huggingface hub 
+And later try to merge it "
+Deepjyoti120,2023-08-15 07:22:26+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,Thank you Very much for your time and share your knowledge with me 🙂
+TinyPixel,2023-07-28 07:19:01+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,"try using repetition_penalty=1.2 temprature 
+Or there might be some problem with lora"
+TinyPixel,2023-07-28 07:31:11+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded,And this is the sharded version of TheBloke/Llama-2-7B-fp16
+aritrasen,2023-07-28 08:37:30+00:00,comment,TinyPixel/Llama-2-7B-bf16-sharded," repetition_penalty=1.2  , this has worked for me, thanks a lot."
+Mesc70,2023-12-12 18:31:37+00:00,comment,sshleifer/tiny-gpt2,"Beep boop I am the [ONNX export bot 🤖🏎️](https://huggingface.co/spaces/onnx/export). On behalf of [Mesc70](https://huggingface.co/Mesc70), I would like to add to this repository the model converted to ONNX.
+
+What is ONNX? It stands for ""Open Neural Network Exchange"", and is the most commonly used open standard for machine learning interoperability. You can find out more at [onnx.ai](https://onnx.ai/)!
+
+The exported ONNX model can be then be consumed by various backends as TensorRT or TVM, or simply be used in a few lines with 🤗 Optimum through ONNX Runtime, check out how [here](https://huggingface.co/docs/optimum/main/en/onnxruntime/usage_guides/models)!"
+abnormalmapstudio,2023-09-21 23:54:22+00:00,comment,sshleifer/tiny-gpt2,Yeah maybe I'm doing something wrong but try as I might I cannot get a coherent answer from this model (as opposed to distilgpt2) for my dataset.
+YaTharThShaRma999,2024-03-23 14:25:38+00:00,comment,liuhaotian/llava-v1.5-7b,"@LeroyDyer llava 1.6 should be far better then this. Check out llava 1.6 mistral hf since that works with huggingface and is much better in language and answering vqa and captioning images as well.
+
+Also, I would highly not recommend merging llava models as that will most likely reduce vqa and captioning performance by a lot."
+KIK99,2024-01-15 21:12:45+00:00,comment,liuhaotian/llava-v1.5-7b,@andreydmitr20 could you please help me out to fine tune this model. could you please let me know when can we connect on this?
+tonywang21,2023-11-09 10:46:14+00:00,comment,liuhaotian/llava-v1.5-7b,"I encountered the same issue, and it seems that sometimes it returns an empty string. However, after a few attempts, it starts working again. I'm not sure why this happens.
+"
+YaTharThShaRma999,2023-10-08 15:40:34+00:00,comment,liuhaotian/llava-v1.5-7b,I believe llama cpp uses the base model and the projector not them combined. So you should get a gguf of vicuna 1.5 and then get the projector and use the llama cpp script for multi model.
+Yhyu13,2023-10-08 07:38:24+00:00,comment,liuhaotian/llava-v1.5-7b,"@TheBloke Check this one out, bro"
+sinanisler,2023-12-10 22:52:30+00:00,comment,liuhaotian/llava-v1.5-7b,"@TheBloke  
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/645b4ff287c79b6ec0b9d156/QNScD7bKR5M7VF30yQ7D6.png)
+
+"
+YaTharThShaRma999,2023-12-11 14:15:53+00:00,comment,liuhaotian/llava-v1.5-7b,"@sinanisler i think i would reccomend the gguf version instead currently. Since exllama does not support multimodel gptq, llama.cpp with gguf is much much faster then gptq. 
+Heres a llava 7b gguf
+https://huggingface.co/jartine/llava-v1.5-7B-GGUF"
+sinanisler,2023-12-11 14:24:50+00:00,comment,liuhaotian/llava-v1.5-7b,"@YaTharThShaRma999 
+thank you didn't see this one
+
+I will try it :)"
+badayvedat,2023-10-08 10:08:07+00:00,comment,liuhaotian/llava-v1.5-7b,"hey @clem @liuhaotian !
+i've integrated the 7b version into a huggingface space, let me know what you think!
+https://huggingface.co/spaces/badayvedat/LLaVA"
+sjayaram,2023-10-08 22:08:43+00:00,comment,liuhaotian/llava-v1.5-7b,"I really want to use this model as a hosted API. Would I be able to run that same space on a GPU?
+
+Update: I tried running that space on a T4 Small and A10G Small, but it errored out."
+badayvedat,2023-10-09 15:15:46+00:00,comment,liuhaotian/llava-v1.5-7b,"@sjayaram it requires at least an Nvidia 10G Large to run the space. Let me know if you encounter any errors, I'd gladly help!"
+clem,2023-10-09 16:16:46+00:00,comment,liuhaotian/llava-v1.5-7b,@badayvedat nice! the space is paused at the moment but looking forward to trying it!
+badayvedat,2023-10-09 16:28:42+00:00,comment,liuhaotian/llava-v1.5-7b,"@clem i stopped it due to the Nvidia 10G large's pricing, resuming it right now."
+ysharma,2023-10-09 18:21:41+00:00,comment,liuhaotian/llava-v1.5-7b,"Thanks for the tag @clem !
+The demo works brilliantly @badayvedat . Kudos for setting this up! We can do a few QOL updates to the Space, for example, using the built-in upvote/downvote functionality within the Gradio chatbot, using avatars, and chat bubble size. I'll go through the code, I'll be sure to raise a PR tomorrow. "
+badayvedat,2023-10-09 19:59:39+00:00,comment,liuhaotian/llava-v1.5-7b,"Thanks, @ysharma , I will gladly help if you need any help with the code!
+
+Also, I know that this is not the right thread to discuss it but it would be great if we could get a GPU grant for it, so that I wouldn't need to stop it.
+More on: https://huggingface.co/spaces/badayvedat/LLaVA/discussions/1"
+sjayaram,2023-10-09 21:07:58+00:00,comment,liuhaotian/llava-v1.5-7b,"Great work @badayvedat, the demo works wonderfully. As I understand it, the API endpoints provided by Gradio for this space don't really offer full functionality, right? I believe this would be due to the frontend's role in persisting chat history (which isn't part of the API) and the streaming functionality in the HTTP bot function. I'm not too familiar with this code base.
+
+I made a space (forked from yours) that provides a gpt-3.5 like API that takes JSON chat history (and an image) and returns a completion.
+
+Also, I'm able to run my version on a T4 small, which is great for ppl who just want to set up a personal API that they can hit for a project.
+
+Its available here: https://huggingface.co/spaces/sjayaram/LLaVA"
+badayvedat,2023-10-10 03:15:33+00:00,comment,liuhaotian/llava-v1.5-7b,"yes @sjayaram you're right ! and its complexity is due to the ""chat-like"" functionalities. I don't have the details for it either since it was built on the original gradio app provided by the liuhaotian.
+Your space is looking amazing, very clean and organized!
+I was planning to implement a similar API-like functionality with [fal](https://www.fal.ai)
+
+qq: is it using LLaVA-1.5 weights or old weights? I saw it using [LLaVA-Lightning-MPT-7B-preview](https://huggingface.co/liuhaotian/LLaVA-Lightning-MPT-7B-preview), i think they are not the same as LLaVA-1.5, but not sure how they differ? "
+ysharma,2023-10-10 11:06:47+00:00,comment,liuhaotian/llava-v1.5-7b,"Hi @sjayaram I am unable to use your demo atm. I think I can help you with your query about using your demo as an API, but I would instead continue this discussion in a  separate thread on your app. I'd suggest starting a conversation and tagging me there if you're still looking for a solution. "
+aigclab,2023-10-06 23:25:19+00:00,comment,liuhaotian/llava-v1.5-7b,awesome👍
+hazemabbas1,2024-06-10 08:08:56+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,Same Issue
+YaTharThShaRma999,2024-03-01 13:24:51+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,"@dorito96 please look once again.
+Here is llavas repository which supports llava 1.6.
+https://github.com/haotian-liu/LLaVA
+
+Llama cpp also supports it for blazingly fast inference 
+https://github.com/ggerganov/llama.cpp/tree/master/examples/llava"
+Qu3tzal,2024-03-27 11:15:05+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,Can you try the `preprocessor_config` file I made here: https://huggingface.co/liuhaotian/llava-v1.6-vicuna-7b/discussions/6 and tell me if it works for you?
+Qu3tzal,2024-03-27 11:15:54+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,What's the difference with the `-hf` versions?
+YaTharThShaRma999,2024-03-27 22:28:43+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,@Qu3tzal This one can be only loaded with the llava repository. Llava hf models can be loaded with huggingface transformers. There is already a llava 1.6 hf now
+Qu3tzal,2024-03-28 05:45:08+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,"Oh, I see."
+Qu3tzal,2024-03-27 11:15:28+00:00,comment,liuhaotian/llava-v1.6-vicuna-7b,Can you try the `preprocessor_config` file I made here: https://huggingface.co/liuhaotian/llava-v1.6-vicuna-7b/discussions/6 and tell me if it works for you?
+dacorvo,2024-06-03 10:12:14+00:00,comment,NousResearch/Llama-2-7b-chat-hf,Redundant with https://huggingface.co/NousResearch/Llama-2-7b-chat-hf/discussions/7
+fxmarty,2024-02-22 17:04:22+00:00,comment,NousResearch/Llama-2-7b-chat-hf,@chrismarra
+teknium,2024-01-15 07:56:25+00:00,comment,NousResearch/Llama-2-7b-chat-hf,One is trained as a chat model one is a base foundational model
+starbotica,2023-12-22 10:20:47+00:00,comment,NousResearch/Llama-2-7b-chat-hf,"I am just a beginner, but did you try increasing the parameter num_train_epochs?"
+NPap,2023-10-11 10:26:41+00:00,comment,NousResearch/Llama-2-7b-chat-hf,"If you are asking for the format of the prompts for fine-tuning, then from:
+https://huggingface.co/blog/llama2
+```
+<s>[INST] <<SYS>>
+{{ system_prompt }}
+<</SYS>>
+
+{{ user_message }} [/INST]
+```
+I don't see anything for the assistant response though, so maybe something like this(?) 
+```
+<s>[INST] <<SYS>>
+{{ system_prompt }}
+<</SYS>>
+
+{{ user_message }} [/INST]{{ assistant_response }}
+```
+That or with a \n inbetween"
+teknium,2023-10-11 18:55:05+00:00,comment,NousResearch/Llama-2-7b-chat-hf,"> Can I get the dataset in CSV format to fine-tune the model?""
+
+The dataset was never released by Meta. So, unfortunately, no"
+strangeloopcanon,2023-11-15 19:50:16+00:00,comment,NousResearch/Llama-2-7b-chat-hf,"Getting a weird error: ""The model did not return a loss from the inputs, only the following keys: logits. "" ... Any ideas on what I can do to fix this?"
+BramVanroy,2023-09-02 10:20:33+00:00,comment,NousResearch/Llama-2-7b-chat-hf,"@Ali-Work  I think there is no difference. This one is just more ""open"" (not gated) so you can use it without having to use an access token. It's just a redistribution of the same thing."
+emozilla,2023-09-05 16:10:56+00:00,comment,NousResearch/Llama-2-7b-chat-hf,No difference!
+MaziyarPanahi,2024-06-06 09:59:38+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Yes! The `Mistral-7B-Instruct-v0.3` comes with Functions Calling, you just have to follow the required prompt template. https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3"
+MaziyarPanahi,2024-06-06 09:57:02+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Hi @orby 
+It's not the model, this is pretty new feature in transformers: https://github.com/huggingface/transformers/issues/30889
+
+I recommend to use the `Use this model` button and directly use it in your favorite local LM app: 
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/-vJTJCybRYNXJsLBb4BBW.png)
+"
+MaziyarPanahi,2024-05-23 17:32:56+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Hi @ayyylol 
+
+Interesting! I saw that, but I thought it is a model used in their own inference library rather than ""this is the actual tokenizer with extended vocabs"". Are you sure the actual `tokenizer.model` doesn't have those vocabs? Like the GGUF models don't work with function calling tokens? 
+"
+MaziyarPanahi,2024-05-23 19:04:30+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Upon looking at this more closely, they are both identical!
+
+```
+37f00374dea48658ee8f5d0f21895b9bc55cb0103939607c8185bfd1c6ca1f89 tokenizer.model
+37f00374dea48658ee8f5d0f21895b9bc55cb0103939607c8185bfd1c6ca1f89 tokenizer.model.v3
+```
+
+I am pretty confused now! "
+ayyylol,2024-05-24 05:09:04+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"You are right, they appear to be identical. Thank you for looking into that!"
+bradhutchings,2024-05-27 05:29:12+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Trying to install this model with PrivateGPT, I get this complaint about the tokenizer:
+
+> Downloading tokenizer mistralai/Mistral-7B-Instruct-v0.3
+> You set `add_prefix_space`. The tokenizer needs to be converted from the slow tokenizers
+
+Indeed, the 'tokenizer_config.json' file has this attribute set true for v0.3. It wasn't included in v0.2.
+
+Is there anything you can do to make the v0.3 tokenizer a fast tokenizer? Thanks in advance for your help."
+MaziyarPanahi,2024-05-22 20:26:05+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-22 20:26:06+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+Propheticus,2024-05-22 18:23:00+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Nobody did it, because everyone got an error ... (unsupported/unrecognised model architecture)"
+MaziyarPanahi,2024-05-22 20:15:29+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Yes, unfortunately those need an update from Llama.cpp first. (it's a shame, they are very good models)"
+alexcardo,2024-05-22 22:25:53+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"I've updated my llama.cpp to the latest release (and this one recommended by other quantizers). Nonetheless, having the same issue. Unfortunately, I have only Macbook M1 8GB, so this it the only way for me is to run LLM 7-8B, 4q, that's why I'm seeking for any solution."
+MaziyarPanahi,2024-05-23 07:50:49+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,I hope they fix it soon in the Llama.cpp project
+MaziyarPanahi,2024-05-22 18:09:47+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-22 18:09:47+00:00,comment,MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+SFconvertbot,2024-03-28 07:12:57+00:00,comment,fxmarty/tiny-llama-fast-tokenizer,"This is an automated PR created with https://huggingface.co/spaces/safetensors/convert
+
+This new file is equivalent to `pytorch_model.bin` but safe in the sense that
+no arbitrary code can be put into it.
+
+These files also happen to load much faster than their pytorch counterpart:
+https://colab.research.google.com/github/huggingface/notebooks/blob/main/safetensors_doc/en/speed.ipynb
+
+The widgets on your model page will run using this model even if this is not merged
+making sure the file actually works.
+
+If you find any issues: please report here: https://huggingface.co/spaces/safetensors/convert/discussions
+
+Feel free to ignore this PR."
+fxmarty,2023-08-24 17:49:04+00:00,comment,fxmarty/tiny-llama-fast-tokenizer,"Hi, you should upgrade transformers: `pip install -U transformers`. Note though that this model is just for testing, and it will produce garbage output."
+pgleamy,2023-06-11 21:10:24+00:00,comment,fxmarty/tiny-llama-fast-tokenizer,Test
+Gradois,2024-04-25 18:43:08+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Text-generation-webui hasn't added instruct template for llama-3 yet. I've written my own that I think is correct, but not sure:
+{%- set ns = namespace(found=false) -%}
+{%- for message in messages -%}
+    {%- if message['role'] == 'system' -%}
+        {%- set ns.found = true -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if not ns.found -%}
+    {{- '<|start_header_id|>system<|end_header_id|>\n\nAnswer the questions.<|eot_id|>' -}}
+{%- endif %}
+{%- for message in messages %}
+    {%- if message['role'] == 'system' -%}
+        {{- '<|start_header_id|>system<|end_header_id|>\n\n' + message['content'] + '<|eot_id|>' -}}
+    {%- else -%}
+        {%- if message['role'] == 'user' -%}
+            {{-'<|start_header_id|>user<|end_header_id|>\n\n' + message['content'] + '<|eot_id|>'-}}
+        {%- else -%}
+            {{-'<|start_header_id|>assistant<|end_header_id|>\n\n' + message['content'] + '<|eot_id|>'-}}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}
+    {{-''-}}
+{%- endif -%}"
+MaziyarPanahi,2024-04-25 19:22:53+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Awesome! Here's mine, see if we need to improve it:
+
+```
+instruction_template: |-
+  {{-'<|begin_of_text|>'}}  
+  {%- for message in messages %}
+      {%- if message['role'] == 'system' -%}
+          {{- '<|start_header_id|>system<|end_header_id|>\n\n' + message['content'].rstrip() + '<|eot_id|>' -}}
+      {%- else -%}
+          {%- if message['role'] == 'user' -%}
+              {{-'<|start_header_id|>user<|end_header_id|>\n\n' + message['content'].rstrip() + '<|eot_id|>'-}}
+          {%- else -%}
+              {{-'<|start_header_id|>assistant<|end_header_id|>\n\n' + message['content'].rstrip() + '<|eot_id|>' -}}
+          {%- endif -%}
+      {%- endif -%}
+  {%- endfor -%}
+  {%- if add_generation_prompt -%}
+      {{-'<|start_header_id|>assistant<|end_header_id|>\n\n'-}}
+  {%- endif -%}
+```"
+SuperMaxine,2024-05-06 13:09:15+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"‌‌Firstly, I would like to thank the Owner for your outstanding work. However, I am unable to run this model on Ollama. To be more specific, I managed to import it into Ollama through the Modelfile, but the generated responses could not be stopped. Therefore, I drew on the valuable experience shared by several people above and modified the Modelfile to the following form:
+
+```
+FROM ./Meta-Llama-3-70B-Instruct.IQ2_XS.gguf
+
+TEMPLATE """"""{{ if .System }<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
+{{ .Response }}<|eot_id|>""""""
+PARAMETER stop ""<|start_header_id|>""
+PARAMETER stop ""<|end_header_id|>""
+PARAMETER stop ""<|eot_id|>""
+PARAMETER stop ""<|reserved_special_token""
+```
+
+But the output still cannot be stopped. Can anyone help me?"
+SuperMaxine,2024-05-06 17:15:29+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> But the output still cannot be stopped. Can anyone help me?
+
+Has been resolved. For reference, I used the following Modefile
+
+```
+FROM ./Meta-Llama-3-70B-Instruct.IQ2_XS.gguf
+
+PARAMETER temperature 1
+PARAMETER num_ctx 1024
+
+SYSTEM """"""You are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.""""""
+
+TEMPLATE """"""{{ if .System }}<|start_header_id|>system<|end_header_id|>
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+{{ .Response }}<|eot_id|>""""""
+
+PARAMETER stop ""<|start_header_id|>""
+PARAMETER stop ""<|end_header_id|>""
+PARAMETER stop ""<|eot_id|>""
+PARAMETER stop ""<|reserved_special_token""
+```"
+MaziyarPanahi,2024-05-06 17:23:36+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Thanks @SuperMaxine for sharing this template. Very useful, this is how TGI and LM Studio also use stop string(s) to simply stop the generation. "
+MaziyarPanahi,2024-06-05 12:56:45+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,@farhan-ahmad These are quantized GGUF models for Llama.cpp or any libraries that use them. Where is this config.json needed?
+MaziyarPanahi,2024-05-29 08:39:18+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi,
+Which model exactly? The ones that were split, it use the native split in Llama.cpp. Just load the first part (1)"
+MaziyarPanahi,2024-05-20 09:48:34+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,That sounds great! How's the quality of Q2? It should be better than a normal Q2
+LaughterOnWater,2024-05-27 16:54:07+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Thanks @MaziyarPanahi! So, my understanding is that Q2_K is standard for Q2, same as Q2_0. I'm happy to try a specific .gguf if you name it. If you're talking about anything larger, it's likely too slow to be worth trying on my machine."
+MaziyarPanahi,2024-05-29 08:40:22+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,That's great! I was just wondering about the accuracy and the quality of the conversations you are having with `Meta-Llama-3-70B-Instruct.Q2_K.gguf` :)
+LaughterOnWater,2024-05-29 12:44:20+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"An example when talking about cosmology. It's not perfect. But then, I suspect a lot of people in cosmology barely understand the concepts themselves.
+
+---
+
+### User
+
+Please give me the original formulas for the Friedmann and ΛCDM models 
+
+### Assistant
+
+Here are the original formulas for the Friedmann and ΛCDM (Lambda-Cold Dark Matter) models:
+
+**Friedmann Model (1922)**
+
+The Friedmann model, also known as the Friedmann-Lemaître-Robertson-Walker (FLRW) model, is a mathematical framework used to describe the evolution of the universe on large scales. It's based on the assumption that the universe is homogeneous and isotropic.
+
+The Friedmann equation, which describes how the scale factor `a` (related to the universe's expansion) changes with time `t`, is:
+
+**H² = (ȧ/a)² × (ρ/3) - (κc²/a²)**
+
+where:
+- `H` is the Hubble parameter (related to the universe's expansion rate)
+- `a` is the scale factor (related to the universe's size)
+- `ȧ` is the dot notation for time derivative (e.g., ȧ = da/dt)
+- `ρ` is the total energy density of the universe
+- `κ` is a constant related to the curvature of space-time (positive for closed, zero for flat, and negative for open universes)
+- `c` is the speed of light
+
+**ΛCDM Model (1990s)**
+
+The ΛCDM model is an extension of the Friedmann model, which includes dark energy (represented by the cosmological constant `Λ`) and cold dark matter.
+
+The Friedmann equation with dark energy and cold dark matter becomes:
+
+**H² = (ȧ/a)² × (ρc/3 + Λ/3) - (κc²/a²)**
+
+where:
+- `Λ` is the cosmological constant (related to dark energy)
+- `ρc` is the cold dark matter energy density
+- The other symbols have the same meanings as above.
+
+In the ΛCDM model, the universe's total energy density `ρ` is comprised of three components:
+
+**ρ = ρc + ρm + ρΛ**
+
+where:
+- `ρc` is the cold dark matter energy density
+- `ρm` is the baryonic (ordinary) matter energy density
+- `ρΛ` is the dark energy density (related to the cosmological constant `Λ`)
+
+These models form the basis of modern cosmology, and their variations are still widely used today to describe the evolution and structure of our universe!
+
+### User
+
+For your version of the Friendmann model, please walk me through step-by-step how we get to this version of the same model:
+
+H(t) = H₀ / (1 + Ωm * (t/t₀)^(2/3))
+
+### Assistant
+
+Let's derive the Friedmann model, and I'll show you step-by-step how we get to the version:
+
+**H(t) = H₀ / (1 + Ωm \* (t/t₀)^(2/3))**
+
+We start with the original Friedmann equation:
+
+**H² = (ȧ/a)² × (ρ/3) - (κc²/a²)**
+
+where `H` is the Hubble parameter, `a` is the scale factor, `ȧ` is the time derivative of `a`, `ρ` is the total energy density, `κ` is a constant related to the curvature of space-time, and `c` is the speed of light.
+
+**Step 1: Simplify the equation**
+We can rewrite the Friedmann equation using the following:
+
+* `ȧ = -a'/a` (since `a` is decreasing with time)
+* `ρ = ρm/a³` (assuming a universe dominated by matter, where `ρm` is the baryonic  ordinary matter energy density)
+
+**H² = (-a'/a)² × (ρm/3a³) - (κc²/a²)**
+
+**Step 2: Introduce the curvature parameter Ωk**
+We can rewrite the Friedmann equation using the following:
+
+* `Ωk = κc² / a²` (curvature parameter)
+* `Ωm = ρm / ρc` (matter density parameter, where `ρc` is the critical energy density)
+
+**H² = (-a'/a)² × Ωm × (1/a) - Ωk**
+
+**Step 3: Assume a flat universe (Ωk = 0)**
+For a flat universe (`Ωk = 0`), we get:
+
+**H² = (-a'/a)² × Ωm × (1/a)**
+
+**Step 4: Solve for H(t)**
+Now, we can solve for `H(t)` by rearranging the equation:
+
+**(da/dt)² = Ωm × (1/a³)**
+
+**(da/dt) = √(Ωm × (1/a³))**
+
+**H(t) = √(Ωm × (1/a³))**
+
+**Step 5: Introduce the scale factor a(t)**
+We can relate `a` to time `t` using:
+
+**a(t) = a₀ × (t/t₀)²/3**
+
+where `a₀` is the scale factor at time `t₀`.
+
+Substituting this into the equation for `H(t)`:
+
+**H(t) = √(Ωm × ((t/t₀)^(-2)))**
+
+**Step 6: Simplify and rearrange**
+Finally, we can simplify and rearrange to get:
+
+**H(t) = H₀ / (1 + Ωm × (t/t₀)^(2/3))**
+
+where `H₀` is the Hubble parameter at time `t₀`.
+
+And that's how we arrive at the version of the Friedmann model you mentioned!
+
+**H(t) = H₀ / (1 + Ωm × (t/t₀)^(2/3))**
+
+This equation describes the evolution of the universe on large scales, assuming a flat universe dominated by matter.
+
+### User
+
+Likewise, please derive step by step this LambdaCDM formula from the original:
+
+H(t) = H₀ * √((Ωm / a) + ΩΛ / a^3)
+
+### Assistant
+
+Let's derive the ΛCDM model, and I'll show you step-by-step how we get to the version:
+
+**H(t) = H₀ * √((Ωm / a) + ΩΛ / a³)**
+
+We start with the original Friedmann equation with dark energy (ΛCDM):
+
+**H² = (ȧ/a)² × (ρc/3 + Λ/3) - (κc²/a²)**
+
+where `H` is the Hubble parameter, `a` is the scale factor, `ȧ` is the time derivative of `a`, `ρc` is the cold dark matter energy density, `Λ` is the cosmological constant, `κ` is a constant related to the curvature of space-time, and `c` is the speed of light.
+
+**Step 1: Simplify the equation**
+We can rewrite the Friedmann equation using the following:
+
+* `ȧ = -a'/a` (since `a` is decreasing with time)
+* `ρc = ρm/a³` (assuming a universe dominated by cold dark matter, where `ρm` is the baryonic ordinary matter energy density)
+
+**H² = (-a'/a)² × ((ρm/3a³) + Λ/3) - (κc²/a²)**
+
+**Step 2: Introduce the curvature parameter Ωk and ΩΛ**
+We can rewrite the Friedmann equation using the following:
+
+* `Ωk = κc² / a²` (curvature parameter)
+* `Ωm = ρm / ρc` (matter density parameter, where `ρc` is the critical energy density)
+* `ΩΛ = Λ / ρc` (dark energy density parameter)
+
+**H² = (-a'/a)² × Ωm × (1/a) + ΩΛ - Ωk**
+
+**Step 3: Assume a flat universe (Ωk = 0)**
+For a flat universe (`Ωk = 0`), we get:
+
+**H² = (-a'/a)² × Ωm × (1/a) + ΩΛ**
+
+**Step 4: Solve for H(t)**
+Now, we can solve for `H(t)` by rearranging the equation:
+
+**(da/dt)² = Ωm × (1/a) + ΩΛ**
+
+**(da/dt) = √(Ωm × (1/a) + ΩΛ)**
+
+**H(t) = √(Ωm × (1/a) + ΩΛ)**
+
+**Step 5: Introduce the scale factor a(t)**
+We can relate `a` to time `t` using:
+
+**a(t) = a₀ × (t/t₀)²/3**
+where `a₀` is the scale factor at time `t₀`. 
+Substituting this into the equation for `H(t)`:
+
+**H(t) = √(Ωm × ((t/t₀)^(-2) + ΩΛ × ((t/t₀)^(-3)))**
+
+**Step 6: Simplify and rearrange**
+Finally, we can simplify and rearrange to get:
+
+**H(t) = H₀ * √((Ωm / a) + ΩΛ / a³)**
+
+where `H₀` is the Hubble parameter at time `t₀`. 
+And that's how we arrive at the version of the ΛCDM model you mentioned!
+
+**H(t) = H₀ * √((Ωm / a) + ΩΛ / a³)**
+
+This equation describes the evolution of the universe on large scales, assuming a flat universe with cold dark matter and dark energy.
+
+### User
+
+Can you explain ΛCDM in lay terms? What is Cold Dark Matter?
+
+### Assistant
+
+I'd be happy to explain the ΛCDM model and Cold Dark Matter in simple terms!
+
+**What is the ΛCDM Model?**
+The ΛCDM (Lambda-Cold Dark Matter) model is a way to describe the universe on large scales. It's a mathematical framework that tries to explain how the universe evolved and grew over billions of years.
+
+Imagine you have a big balloon, and inside the balloon, there are three types of ""stuff"":
+
+1. **Cold Dark Matter (CDM)**: This is a type of matter that we can't see or interact with directly. It's called ""cold"" because it moves slowly compared to other particles, and ""dark"" because we don't know what it is made of. CDM makes up about 27% of the universe.
+2. **Dark Energy (Λ)**: This is a mysterious energy that pushes the universe apart, making it expand faster and faster. It's called ""dark"" because we don't know what it is or how it works. Dark Energy makes up about 68% of the universe.
+3. **Ordinary Matter**: This is the regular matter we see every day, like stars, planets, and galaxies. It makes up only about 5% of the universe.
+
+The ΛCDM model combines these three components to explain how the universe evolved:
+
+* In the early universe, Cold Dark Matter dominated, and gravity pulled everything together.
+* As the universe expanded, Dark Energy started to dominate, pushing everything apart and making the expansion accelerate.
+* Ordinary Matter is just a small part of the universe, but it's what we can see and interact with.
+
+**What is Cold Dark Matter?**
+Cold Dark Matter (CDM) is a type of matter that makes up about 27% of the universe. It's called ""cold"" because it moves slowly compared to other particles, and ""dark"" because we don't know what it is made of.
+
+Here are some key points about CDM:
+
+* **Invisible**: We can't see Cold Dark Matter directly, as it doesn't emit or absorb any light.
+* **Interacts only through gravity**: CDM interacts with other matter only through gravity, not through electromagnetic forces like light or radiation.
+* **Slow-moving**: CDM particles move slowly compared to other particles, making them hard to detect.
+* **Unknown composition**: We don't know what Cold Dark Matter is made of or how it's created.
+
+CDM is an essential component of the ΛCDM model, as it helps explain the universe's large-scale structure and evolution. However, its exact nature remains a mystery, and scientists continue to investigate its properties and behavior.
+
+I hope this explanation helps!
+
+### User
+
+You list three components inside the ""balloon"". What about normal energy? 
+
+### Assistant
+
+Normal matter, also known as baryonic matter or ordinary matter, is indeed an important component of the universe. It includes everything we can see and interact with, such as:
+
+* Stars
+* Galaxies
+* Planets
+* Atoms
+* Molecules
+* Photons (light)
+* Neutrinos
+* And many other particles
+
+Normal matter makes up only about 5% of the universe's total energy density. It's the ""ordinary"" matter that we're familiar with, and it's a crucial part of the ΛCDM model.
+
+So, to recap, the four components inside the ""balloon"" are:
+
+1. **Cold Dark Matter (CDM)**: About 27% of the universe
+2. **Dark Energy (Λ)**: About 68% of the universe
+3. **Normal Matter (Ordinary Matter)**: About 5% of the universe
+4. **Radiation (Photons, Neutrinos, etc.)**: A very small fraction of the universe
+
+These four components combine to form the ΛCDM model, which describes the evolution and structure of our universe on large scales.
+
+Thanks for pointing out the omission!"
+MaziyarPanahi,2024-05-30 08:50:19+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"These are good responses! Not judging the correctness (I am not an expert in the field), but from the writing style and how coherent point of view.
+
+Thanks for sharing them :)  "
+MaziyarPanahi,2024-05-14 14:51:22+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-14 14:51:23+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-13 16:28:47+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-13 16:28:48+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-12 07:41:22+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi @metmetmeta 
+You are welcome! Could you share your Llama.cpp full command-line? I am wondering if you use the correct stop string: 
+
+```
+./llama.cpp/main -m Meta-Llama-3-70B-Instruct.Q2_K.gguf -r '<|eot_id|>' --in-prefix ""\n<|start_header_id|>user<|end_header_id|>\n\n"" --in-suffix ""<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"" -p ""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.<|eot_id|>\n<|start_header_id|>user<|end_header_id|>\n\nHi! How are you?<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>\n\n"" -n 1024
+```"
+metmetmeta,2024-05-12 13:08:11+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi @MaziyarPanahi,
+
+I am using the following command to launch the model:
+`./llama.cpp/main -m ./llama.cpp/models/QL370B/Meta-Llama-3-70B-Instruct.Q8_0-00001-of-00002.gguf -r '<|eot_id|>' --in-prefix ""\n<|start_header_id|>user<|end_header_id|>\n\n"" --in-suffix ""<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"" -p ""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.<|eot_id|>\n<|start_header_id|>user<|end_header_id|>\n\nHi! How are you?<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>\n\n"" -n 1024 --color --interactive-first`
+
+the only differences:
+- the model path: `./llama.cpp/models/QL370B/Meta-Llama-3-70B-Instruct.Q8_0-00001-of-00002.gguf`
+- `--color --interactive-first`
+
+
+![2.png](https://cdn-uploads.huggingface.co/production/uploads/663d1f26a2da73482bd2f930/OhGjpXDACJE0kvYkuaLAi.png)
+
+Although the model seems to stop this time, it refuses to answer any subsequent query.
+
+Thanks!
+"
+MaziyarPanahi,2024-05-14 08:04:48+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I have pushed some new files with a correct eos_token_id that should help reduce the configs. That said, this must be the Llama.cpp prompts and how they are constructed for multi-turn. In LM Studio I can have a very long discussion (7K) and it remembers everything."
+metmetmeta,2024-05-15 21:18:12+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@MaziyarPanahi 
+switching to LM studio solved the issue!
+
+Thank you very much for your help!"
+MaziyarPanahi,2024-05-11 14:59:16+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"It's really not an issue if the library you are using has stop strings set to  `<|eot_id|>` and it works without any issue. (Ollama, LM Studio, etc.`)
+
+If what you use to serve doesn't support terminators/stop_strings, you can edit the GGUF metadata tokenizer.eos_token_id to `128009 ` yourself easily.
+
+PS: https://huggingface.co/MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF/discussions/7"
+Gnurro2,2024-05-11 22:01:22+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I'll do that, then.
+Just seeing that 300k+ people downloaded these model files as the most convenient way of using Llama3, and many users do not know how to pull off that edit. Would save them the hassle. ;)"
+MaziyarPanahi,2024-05-12 07:42:16+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Makes sense, I'll see if I can re-upload the edited files this weekend :) "
+Gnurro2,2024-05-14 10:23:08+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Great, thanks for the reuploads! ...I think you missed the Q8, though. ;)"
+MaziyarPanahi,2024-05-14 14:32:10+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"You are totally right, uploading it now :) "
+MaziyarPanahi,2024-05-10 09:01:08+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi @Mao3267 
+
+These are native splits by Llama.cpp:
+- you don't need to merge them in order to use it. You can just use the first part `0-00001-of-00002.gguf` and it automatically loads the rest:
+```
+./llama.cpp/main -m 
+Meta-Llama-3-70B-Instruct.Q8_0-00001-of-00002.gguf -r '<|eot_id|>' --in-prefix ""\n<|start_header_id|>user<|end_header_id|>\n\n"" --in-suffix ""<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"" -p ""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.<|eot_id|>\n<|start_header_id|>user<|end_header_id|>\n\nHi! How are you?<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>\n\n"" -n 1024
+```
+- Since these were split by natively using Llama.cpp, you cannot use `cat`to merge them back. You MUST use the `merge` method if you want them to be 1 file: https://github.com/ggerganov/llama.cpp/discussions/6404 
+
+For instance:
+
+```
+llama.cpp/gguf-split --merge Meta-Llama-3-70B-Instruct.Q8_0-00001-of-00002.gguf Meta-Llama-3-70B-Instruct.Q8.gguf
+```"
+MaziyarPanahi,2024-05-08 10:11:54+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi,
+I am not sure how capable the original Llama-3-70B is in other non-western languages like Arabic or Persian. I think there should be a separate fine-tuned model focusing on Persian language to improve the support and quality. 
+
+The model in 16bit requires ~140G VRAM to be loaded into multiple GPUs. (at least 2 A100 with 80G each, or 4 A100 with 40G each)"
+MaziyarPanahi,2024-05-06 13:00:22+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"These are quantized models suitable for CPUs (and GPUs) but via Llama.cpp or any other libraries that use Llama.cpp. If you want to use `AutoModelForCausalLM`, I suggest using the original model for GPU: https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct"
+alexskr,2024-05-08 19:32:24+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,Thanks @MaziyarPanahi could you please help me with hardware requirements for running this model. Thanks!
+MaziyarPanahi,2024-05-10 08:49:17+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"You are welcome. The first question is, do you only have CPUs (RAM) or do you also have any GPU device? (it is possible to offload some layers on GPUs and the rest on CPUs)"
+KIlian42,2024-05-11 23:31:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Many thanks for your response @MaziyarPanahi :-) I am quite new with Llama.cpp. 
+
+ I would like to try your GGUF model, but only use GPU. However, even if configure   ""n_threads"":0 and   ""n_gpu_layers"":40, I do not see any GPU usage and the response takes very long (because the inferring  is handled by the CPU I guess).  Do you have any idea what I am doing wrong? Here is my code:
+
+# *************
+from huggingface_hub import hf_hub_download
+from llama_cpp import Llama
+model_name = ""MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF""
+model_file = ""Meta-Llama-3-70B-Instruct.Q5_K_M.gguf""
+model_path = hf_hub_download(model_name, filename=model_file)
+model_kwargs = {
+  ""n_ctx"":4096,    # Context length to use
+  ""n_threads"":0,   # Number of CPU threads to use
+  ""n_gpu_layers"":40, # Number of model layers to offload to GPU. Set to 0 if only using CPU
+}
+llm = Llama(model_path=model_path, **model_kwargs)
+res = llm(""Hello, Llama3!"", **generation_kwargs)
+print(res[""choices""][0][""text""])
+# *************
+
+Another general question: For GPTQ a dataset is needed on which the quantization is optimized. Is this also the case for GGUF? And if so, which dataset did you use for it? :-)
+
+Many thanks for any help in advance. 🙂"
+MaziyarPanahi,2024-05-12 07:59:30+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi @KIlian42 
+
+You are welcome. It seems you are having problem making your Llama.cpp to work with your GPU. I can see you are using llama.cpp-python, it has a specific CUDA build, I recommend following steps in their github to make sure it works with your GPU. 
+
+GPTQ, I use the default `wikitext2` if I remember correctly :)"
+KIlian42,2024-05-12 09:30:20+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,Many thanks for your help. :-) Do you also use  wikitext2 for your GGUF model?
+MaziyarPanahi,2024-05-14 08:02:15+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"No for GGUF we use a subset of a diverse data to make an imatrix file, then with that we quantize."
+KIlian42,2024-05-22 06:47:54+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@MaziyarPanahi Many thanks. The main problem I am facing with all GGUF/GPTQ Llama models is that they quite hallucinating and producing random output. If I just prompt ""Hello"" the models generate so much random output (infinite generation). Even if I set the temperature very low or turn off sampling they still do. Do you also face this issue, or how do you configure your  generation_config? Do I need to configure somewhere to stop the sequence when eos is reached? Would be very thankful for any tips and genration_config templates. :-)
+
+Example:
+model_id = ""MaziyarPanahi/Meta-Llama-3-70B-Instruct-GPTQ""
+quantize_config = BaseQuantizeConfig(
+        bits=4,
+        group_size=128,
+        desc_act=False
+    )
+model = AutoGPTQForCausalLM.from_quantized(
+        model_id,
+        use_safetensors=True,
+        device=""cuda:0"",
+        quantize_config=quantize_config)
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+pipe = pipeline(
+    ""text-generation"",
+    model=model,
+    tokenizer=tokenizer,
+    max_new_tokens=512,
+    temperature=0.1,
+    top_p=0.95,
+    repetition_penalty=1.1
+)
+start=datetime.now()
+outputs = pipe(""How are you?"")
+print(outputs[0][""generated_text""])
+print(f""Duration: {datetime.now()-start}"")
+=================
+Output:
+
+How are you? How was your day?
+I'm doing well,'thank you for asking. My day has been quite busy so far. I've been working on a project and trying to meet a deadline.
+That sounds like a lot of work! What kind of project is it?
+It's a marketing campaign for a new product launch. We're trying to create a buzz around the product and get people excited about it.
+That sounds interesting. What's the product?
+It's a new smartphone app that helps people track their fitness goals and connect with others who share similar interests. It's really cool!
+Wow, that does sound cool! I could use something like that. Do you think it'll be popular?
+We hope so! The market research suggests that there's a big demand for this type of app, and we're confident that it'll do well. But we'll have to wait and see how it performs once it's launched.
+
+In this example, the conversation starts with a greeting and an inquiry about the other person's day. The response provides some information about what they've been doing, which leads to further questions and discussion. The conversation flows naturally and doesn't feel forced or artificial.
+
+Here are some tips for having a natural-sounding conversation in English:
+
+1. **Start with a greeting**: Begin with a hello, hi, or hey, and ask how the other person is doing.
+2. **Be interested**: Show genuine interest in the other person's life and ask follow-up questions based on what they say.
+3. **Use conversational language**: Avoid using overly formal or stilted language. Instead, opt for everyday phrases and expressions that you would use with friends.
+4. **Keep it simple**: Don't try to use complicated vocabulary or grammar structures that might make you stumble. Stick to what feels comfortable and natural.
+5. **Listen actively**: Pay attention to what the other person is saying and respond accordingly. This will help keep the conversation flowing smoothly.
+
+By following these tips, you can have more natural-sounding conversations in English and improve your communication skills.assistant
+
+Excellent advice!
+
+Starting with a greeting and showing genuine interest in the other person's life sets the tone for a friendly and engaging conversation. Using conversational language and keeping it simple also helps to avoid awkwardness and misunderstandings.
+
+Active listening is crucial in maintaining a smooth flow of conversation. By paying attention to what the other person is saying, you can respond thoughtfully and show that you value their thoughts and opinions.
+
+Additionally, being open-minded
+Duration: 0:01:02.534108
+
+Many thanks in advance for any advises! :-)"
+MaziyarPanahi,2024-05-23 07:54:09+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@KIlian42 
+
+I have tested all the GGUF models, they work without any issue. You should test them in LM Studio that already sets the correct prompts / parameters.
+
+In this code, you are using `GPTQ`, which is not the same model as in this repo. There could be issues with GPTQ, if there is please open a discussion in the actual model's discussion."
+MaziyarPanahi,2024-04-20 17:36:26+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-20 17:36:27+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+reinman,2024-04-20 11:19:56+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,I think the old method of catting the files together is obsolete and you can just point to the first file in the series (e.g. 1 of x) and it will load the remaining assuming they are named correctly
+luccazen,2024-04-19 00:39:34+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"yes.
+i couldn't run the 70b bigger than Q3 on my setup and its garbage.
+I am working on a llama-cpp-python prompt template for function calling for llama 3.
+I am getting good results with the 8B https://github.com/themrzmaster/llama-cpp-python"
+MaziyarPanahi,2024-04-19 07:07:45+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,I am actually going to test this at 16bit for function calling (first only instruction) this weekend. I'll update you here 
+zhouzr,2024-04-19 16:43:55+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Function call work well with Llama3
+
+https://github.com/EvilPsyCHo/Play-with-LLMs/blob/main/examples/llama3-8b-Instruct-CoT-Agent-vllm.ipynb"
+MaziyarPanahi,2024-04-19 17:53:37+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,@zhouzr Nice! Let's see if we can do this one with Llama-3-70B: https://github.com/EvilPsyCHo/Play-with-LLMs/blob/main/examples/mistral-ReAct-Agent-with-function-tool-call.ipynb
+SvenJoinH,2024-04-19 18:10:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Using the Llama 3 template in LM studio and adding the eos_token_id to 128009 did not help (model chats garbage). The 8B version works. Any ideas?
+"
+MaziyarPanahi,2024-04-19 18:31:24+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,I am download the Q2 in LM Studio and will get back to you. They both were made with the same Llama.cpp build. So they should either work or not. I'll test and come back to you
+BigDeeper,2024-04-19 18:54:41+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I  am testing directly with llama.cpp/main and it outputs responsive content for a while and then starts producing garbage.
+
+p.s. using the 6 bit version.
+"
+SvenJoinH,2024-04-19 19:00:03+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I found this change to llama.cpp:
+
+https://github.com/ggerganov/llama.cpp/pull/6745
+https://github.com/ggerganov/llama.cpp/pull/6745/files
+
+Here are some files that has used this method:
+https://huggingface.co/lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF
+
+"
+MaziyarPanahi,2024-04-19 19:10:24+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Here is my 70B Q2 that I just downloaded: 
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/RuX_PtApXFSIK9jpDgmMP.png)
+
+Stops right, it's the last release of LM Studio from last night"
+MaziyarPanahi,2024-04-19 19:13:44+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> I found this change to llama.cpp:
+> 
+> https://github.com/ggerganov/llama.cpp/pull/6745
+> https://github.com/ggerganov/llama.cpp/pull/6745/files
+> 
+> Here are some files that has used this method:
+> https://huggingface.co/lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF
+
+As you can see from 8B discussions and my 70B screenshots, the quants for these models work perfectly. Those changes in the PR, is to make it easier for people who convert to pick the right BPE and add something to the Llama.cpp when it comes to Llama-3. 
+
+But you don't have to go with Llama.cpp default template taken from the tokenizer, you can provide it yourself as we do in LM Studio or manually in llama.cpp and it all work without any issue."
+SvenJoinH,2024-04-19 19:22:38+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I download the one i whant and try again, maybe i downloaded from another user...=). But other seams to have the same problem so i am confused...I got the lmstudio.community to work at least."
+SvenJoinH,2024-04-19 19:50:34+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Downloading and using Meta-Llama-3-70B-Instruct.IQ3_XS.gguf:
+
+![Skärmbild 2024-04-19 213510.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/5EADKjlWsvEkLYen0LrgR.png)
+
+Fixing the eos_token_id to 128009:
+
+![Skärmbild 2024-04-19 214551.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/wbK-A6unM5KUagfqI1qhg.png)
+
+Using the a gguf file from lmstudio-community:
+
+![Skärmbild 2024-04-19 214644.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/JIQaf4ZaCJmY_o5AnHnhy.png)
+
+
+"
+MaziyarPanahi,2024-04-19 20:06:26+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"That's strange! Also, I don't do `Fixing the eos_token_id to 128009:` part. 
+
+- Fresh LM Studio,
+- and any GGUF model
+
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/tV8-wLdEEfdCqYX06A__A.png)
+"
+SvenJoinH,2024-04-19 20:15:32+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I have 0.2.20 aswell. I am downloading a non ""i"" quant, Can it be what different quants have different problems?
+
+
+(but you said that you could load any gguf....)"
+MaziyarPanahi,2024-04-19 20:19:56+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> I have 0.2.20 aswell. I am downloading a non ""i"" quant, Can it be what different quants have different problems?
+> 
+> 
+> (but you said that you could load any gguf....)
+
+That is possible! I don't try IQ models usually and go with _S or _M. Let me know how it goes, if the `I` is not good I'll make another one"
+SvenJoinH,2024-04-19 21:01:50+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"
+Loading the Meta-Llama-3-70B-Instruct.Q3_K_S.gguf:
+
+![Skärmbild 2024-04-19 224108.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/q9vJInNjBAnh4NDPa30JZ.png)
+
+Fixing the eos problem:
+
+* Loading: Meta-Llama-3-70B-Instruct.Q3_K_S.gguf
+* Preparing to change field 'tokenizer.ggml.eos_token_id' from 128001 to 128009
+*** Warning *** Warning *** Warning **
+* Changing fields in a GGUF file can make it unusable. Proceed at your own risk.
+* Enter exactly YES if you are positive you want to proceed:
+YES, I am sure> YES
+* Field changed. Successful completion.
+
+
+![Skärmbild 2024-04-19 225807.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/-H_T1gol7W-O-G3GJxWv8.png)
+
+
+Seams to be the i matrix quants that are problematic?
+"
+MaziyarPanahi,2024-04-20 05:35:20+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,Interesting! I'll make an imatrix this weekend and redo the `I` quants with that again. 
+SvenJoinH,2024-04-20 06:47:25+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,Maybe also try with the https://github.com/ggerganov/llama.cpp/pull/6745/files ?
+MaziyarPanahi,2024-04-20 06:57:10+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Could you please try this on the existing GGUF models?
+
+```
+./llama.cpp/main -m Meta-Llama-3-70B-Instruct.Q2_K.gguf -r '<|eot_id|>' --in-prefix ""\n<|start_header_id|>user<|end_header_id|>\n\n"" --in-suffix ""<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+\n\n"" -p ""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.<|eot_id|>\n<|start_header_id|>user<|end_header_id|>\n\nHi!<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>\n\n"" -n 1024
+```
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/8VwXPeeJH3rClSVe2td3L.png)
+
+The modifications introduced in that PR was to fix some issues in converting the model to GGUF, not the prompt template / tokenizer."
+SvenJoinH,2024-04-20 07:10:32+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I get a trivial | was unexpected at this time.
+
+I usally dont play with these tools so i am a bit lost."
+MaziyarPanahi,2024-04-20 08:34:56+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,Here is a quick demo to show how to use it and you can see the response: https://colab.research.google.com/drive/1HD-_evvGo1l1B-imVfQP7BKfDe-7BbE-?usp=sharing
+SvenJoinH,2024-04-20 09:26:18+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hmm ... changed '<|eot_id|>'  to ""<|eot_id|>"" insteed. But it seams to work. please note i used my fixed eos gguf
+
+
+![Skärmbild 2024-04-20 112317.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/oFWg4i_EmldvEsYxU2Qrt.png)
+
+So it works from the command line....
+
+
+Hmm this was the K_S that worked all the time.....
+
+The broken one (eos fixed) IQ3_XS:
+
+![Skärmbild 2024-04-20 113807.png](https://cdn-uploads.huggingface.co/production/uploads/64bbfff9b7375f6b84448361/glznviejIQTKrapLyn756.png)
+"
+MaziyarPanahi,2024-04-20 09:42:10+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I have removed all the `IQ` quants from all my GGUF repos. I forgot to do an imatrix, so their quality was not good. The rest have been tested in Llama.cpp, llama.cpp-python, and LM Studio without changing metadata (with actual prompt) - similar to the demo in Colab.
+
+"
+BigDeeper,2024-04-20 13:48:49+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I am currently running gpt-pilot with the ollama import of Llama-3-70B. The model as imported is about 40GB. Ollama is able to distribute it over 4 GPUs with 12.2GiB VRAM each.
+
+It seems to be ""working"" in the sense that it does similar thing that I saw when I ran gpt-pilot with OpenAI API. Sometimes it starts outputting junk, on the screen and into files, and I have to cancel and restart for it to behave reasonably again. The key here is that gpt-pilot is able to create files, and mostly is doing reasonable things. What I don't know is whether any of this code will work or not. "
+MaziyarPanahi,2024-04-20 17:49:00+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@SvenJoinH I have now uploaded 5 new IQ quants for 70B based on the imatrix, they are pretty good. Even the IQ-1_S which is the smallest quants. "
+SvenJoinH,2024-04-20 18:12:25+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I am downloading now, if they work i (and others i assume) will be very thankful for you effort."
+c-kunz,2024-04-20 18:14:35+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> @SvenJoinH I have now uploaded 5 new IQ quants for 70B based on the imatrix, they are pretty good. Even the IQ-1_S which is the smallest quants.
+
+Thank you so much!
+
+I've been trying an IQ2-XS quant from some other repo, and it indeed works eerily good. I can't wait to get my hands on a functioning IQ3-XS as well, much appreciated!"
+MaziyarPanahi,2024-04-20 18:15:43+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"I have tested it both locally and in LM Studio. The one before was made without any imatrix so all the IQ- quants were bad. These ones are tested and they are up for the task:
+
+![GLoIHgxWYAI0OaJ.jpeg](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/CNPnxjMX46ejVZWd867gu.jpeg)
+"
+yehiaserag,2024-04-21 10:53:19+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"The same problem is happening with me for the Q4_M, it's unable to stop, so I dont think it's a problem with IQuants only"
+MaziyarPanahi,2024-04-21 11:03:57+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@yehiaserag depending on where you use these GGUF models, if you don't follow the correct template it fails to stop. Here is a live demo with the smallest Q2 GGUF, downloaded right in the Colab, and you can see the response stopped perfectly fine. The important part is, I used the correct chat template and didn't rely on Llama.cpp to provide one for me:
+
+https://colab.research.google.com/drive/1HD-_evvGo1l1B-imVfQP7BKfDe-7BbE-?usp=sharing"
+phi0112358,2024-04-21 11:26:41+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Do I understand correctly that the error was/is due to the fact that an incorrect EOS was defined? Because the Q4_K_S model still shows `EOS token = 128001 '<|end_of_text|>'`; so incorrect, instead of `<|eot_id|>` as it should be correctly."
+MaziyarPanahi,2024-04-21 12:50:04+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"On the application level, when you see `<|eot_id|>` string generated they all stop generating. If you define the stop string as `es_token_id` blindly, then yes that must be fixed. But if you just say I know `<|eot_id|>` is the stop string, just stop if you see it, then everything should be fine. (my example, LM Studio, etc.)"
+BigDeeper,2024-04-21 15:00:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"So what is the final and the correct way to prompt these Q models? I'd like to use ollama to import a quantized model. Should the system prompt be used only once, or with every single query? Should ""<|end_of_text|>"" at all, if it is interactive?
+
+Thanks."
+MaziyarPanahi,2024-04-21 15:57:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"This is how I use it in Llama.cpp (in other apps the stop strings is set to `[""<|eot_id|>"", ""<|end_of_text|>""]` and it stops perfectly regardless of what's in the tokenizer.):
+
+
+```
+'<|eot_id|>' --in-prefix ""\n<|start_header_id|>user<|end_header_id|>\n\n"" --in-suffix ""<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"" -p ""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, smart, kind, and efficient AI assistant. You always fulfill the user's requests to the best of your ability.<|eot_id|>\n<|start_header_id|>user<|end_header_id|>\n\nHi! How are you?<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>\n\n"" -n 1024
+```
+
+https://colab.research.google.com/drive/1HD-_evvGo1l1B-imVfQP7BKfDe-7BbE-?usp=sharing#scrollTo=R88QtCrMUraW"
+BigDeeper,2024-04-21 16:04:46+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Ok, but is it a single shot or interactive use? For a single shot you would pass your system prompt to the model every time. If one uses the model interactively, you want to pass the system prompt once. Also if one is using the model interactively, how does one end the assistant output? Or do you just leave it open?"
+MaziyarPanahi,2024-04-21 16:42:57+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"You follow the official template, always.  The model will at some point when it thinks the generation is over generate the `eos_token`. If the software supports stop_strings or stop_squence_strings, by seeing that it will stop the generation. (which is the only way to stop any LLM from keep on generating)
+
+This is a multi-turn:
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/ZVoUE5oar8wJMA1gbmV-F.png)
+
+
+Perhaps, it's best if you can share what it is you are doing so we can test it on our side and see why it fails"
+Nekotekina,2024-04-21 18:31:21+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hello, can you make IQ quants of Non-Instruct 70B as well? I really want to test it but my own attempt of doing it failed."
+MaziyarPanahi,2024-04-21 18:47:12+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> Hello, can you make IQ quants of Non-Instruct 70B as well? I really want to test it but my own attempt of doing it failed.
+
+Hi,
+Just out of curiosity, what are the use cases of the base model in GGUF? Can you fine-tune based on GGUF quant models? "
+Nekotekina,2024-04-21 18:57:53+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"No, it isn't very useful, I'm just curious how it reacts to various prompting. It also seems uncensored unlike Instruct, in the case of 8B that is."
+MaziyarPanahi,2024-04-22 08:05:38+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> No, it isn't very useful, I'm just curious how it reacts to various prompting. It also seems uncensored unlike Instruct, 8B that is.
+
+That's OK, let me see what others have done in the last few days. I'll do the ones that are missing :)"
+Nekotekina,2024-04-22 16:55:29+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"It also seems that ones made by https://huggingface.co/mradermacher doesn't work and outputs garbage.
+https://huggingface.co/mradermacher/Meta-Llama-3-70B-i1-GGUF/discussions/2"
+MaziyarPanahi,2024-04-22 18:59:29+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,I suspect it's because it's a base model. The IQ-1 GGUF here actually works surprisingly good! 
+aaditya,2024-04-23 01:40:42+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"How did you upload Q6 and Q8? I am trying to upload, getting a 50GB limit error. Can you share the script to split the shards?"
+MaziyarPanahi,2024-04-23 06:43:00+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@aaditya  you have to split anything that is larger than 48G limit of Hugging Face. You can do that with a simple split/cat in linux, or use the native split/merge in Llama.cpp: https://github.com/ggerganov/llama.cpp/discussions/6404"
+Nekotekina,2024-04-23 10:12:59+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> I suspect it's because it's a base model. The IQ-1 GGUF here actually works surprisingly good!
+
+~~I posted some tests in the discussion. It looks something is wrong with iMatrix.~~
+Created an issue on github.
+https://github.com/ggerganov/llama.cpp/issues/6841"
+skzz,2024-04-23 11:24:53+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Hi, I encountered the not stop generating problem with models smaller than 24GB by LMStudio. I managed to resolve the issue by adding the word 'assistant' as a stop string.
+![llama3.png](https://cdn-uploads.huggingface.co/production/uploads/65fbf3b8b0068def42a7646f/1HhN54huXuLO63m-T-6pg.png)
+"
+phi0112358,2024-04-23 11:58:35+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> > Hello, can you make IQ quants of Non-Instruct 70B as well? I really want to test it but my own attempt of doing it failed.
+> 
+> Hi,
+> Just out of curiosity, what are the use cases of the base model in GGUF? Can you fine-tune based on GGUF quant models?
+
+Oh yes! You actually can finetune gguf quant models with llama.cpp "
+MaziyarPanahi,2024-04-23 12:10:31+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"damn!!! very interesting.
+I found these:
+
+- https://huggingface.co/NousResearch/Meta-Llama-3-70B-GGUF
+- https://huggingface.co/LoneStriker/Meta-Llama-3-70B-GGUF
+- https://huggingface.co/NousResearch/Meta-Llama-3-8B-GGUF
+- https://huggingface.co/QuantFactory/Meta-Llama-3-8B-GGUF
+"
+Nekotekina,2024-04-23 12:16:23+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,This comment has been hidden
+MaziyarPanahi,2024-04-23 12:39:59+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"> Hi, I encountered the not stop generating problem with models smaller than 24GB by LMStudio. I managed to resolve the issue by adding the word 'assistant' as a stop string.
+
+
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/lZ0sgGc4Qd3yj0NBMKEA4.png)
+
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/5fd5e18a90b6dc4633f6d292/0oOZgFrWsW1KCC9Vf420B.png)
+
+"
+Nekotekina,2024-04-23 14:22:14+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"https://github.com/ggerganov/llama.cpp/issues/6804
+Could be relevant, it seems that imatrix has some issues after all."
+MaziyarPanahi,2024-04-23 14:27:28+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Could be, I only use imatrix for `IO-` quants and not for `Q-` quants. I checked the IQ- models myself, the worked very well. (but I had the prompt template correctly)"
+BigDeeper,2024-04-23 15:07:01+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"There is some problem with these quantized models. I was using the 6bit version, and no matter what format I was using for the prompt, it was getting into infinite loops. So I had to switch over to another repo.
+I was using ollama to serve it.
+
+
+The stuff below does NOT loop infinitely.
+
+FROM /opt/data/QuantFactory/Meta-Llama-3-70B-Instruct-GGUF/Meta-Llama-3-70B-Instruct.Q5_K_M.gguf
+
+TEMPLATE """"""{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
+{{ .Response }}<|eot_id|>""""""
+
+PARAMETER num_ctx 8192
+PARAMETER temperature 0.2
+PARAMETER num_gpu 73
+
+PARAMETER stop ""<|eot_id|>""
+PARAMETER stop '<|end_of_text|>'
+PARAMETER stop ""<|start_header_id|>""
+PARAMETER stop ""<|end_header_id|>""
+PARAMETER stop '<|begin_of_text|>'
+
+SYSTEM ""You are a helpful AI which can plan, program, and test."""
+MaziyarPanahi,2024-04-23 15:55:45+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"@BigDeeper 
+I don't know about Ollama, but it works fine in Llama.cpp (latest) and LM Studio (latest). Just make sure you have the latest version of these applications. "
+MaziyarPanahi,2024-04-18 20:15:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 20:15:54+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 18:06:48+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 18:06:52+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 17:36:40+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 17:36:41+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 17:17:41+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-18 17:17:44+00:00,comment,MaziyarPanahi/Meta-Llama-3-70B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+RedOneAI,2023-12-18 14:44:46+00:00,comment,liuhaotian/llava-v1.5-13b,This repository has the file: https://huggingface.co/llava-hf/llava-1.5-7b-hf
+Yhyu13,2023-11-30 10:01:12+00:00,comment,liuhaotian/llava-v1.5-13b,"llava is not part of HF Transformer, you need to use llava git repo's LLavLlama modle loader"
+PsiPi,2023-12-03 03:52:27+00:00,comment,liuhaotian/llava-v1.5-13b,I suppose you could try PsiPi/liuhaotian_llava-v1.5-13b-GGUF until they do.
+guptaan,2023-12-15 16:02:10+00:00,comment,liuhaotian/llava-v1.5-13b,This comment has been hidden
+ionurr,2024-05-14 10:14:30+00:00,comment,liuhaotian/llava-v1.5-13b,I got the same error. Could you solve it @zolf1983 
+unk1911,2024-05-14 23:41:24+00:00,comment,liuhaotian/llava-v1.5-13b,same issue
+liuhaotian,2023-10-12 16:55:02+00:00,comment,liuhaotian/llava-v1.5-13b,"First-stage projectors are already released here:
+
+https://github.com/haotian-liu/LLaVA/blob/main/docs/MODEL_ZOO.md#projector-weights"
+Maxlinn,2023-10-14 16:24:30+00:00,comment,liuhaotian/llava-v1.5-13b,much thanks for timly responding!
+HDiffusion,2023-10-10 04:05:20+00:00,comment,liuhaotian/llava-v1.5-13b,This comment has been hidden
+liuhaotian,2023-10-10 14:22:56+00:00,comment,liuhaotian/llava-v1.5-13b,"Our vision encoder is not finetuned, so it is loaded directly from openai clip vit large 336px."
+edmond,2024-04-19 10:50:48+00:00,comment,liuhaotian/llava-v1.5-13b,"> Our vision encoder is not finetuned, so it is loaded directly from openai clip vit large 336px.
+
+Can we fine tune them ? Because it seems imp is inspired on LLava and prevents us to train the vision tower https://huggingface.co/MILVLG/imp-v1-3b/discussions/9."
+stellaathena,2023-10-06 14:13:47+00:00,comment,EleutherAI/pythia-14m,Uploaded
+stellaathena,2023-11-21 19:00:39+00:00,comment,EleutherAI/pythia-14m,They're all up now. Sorry for the delay.
+chavinlo,2023-04-12 23:39:31+00:00,comment,chavinlo/alpaca-native,This comment has been hidden
+chavinlo,2023-04-14 02:25:51+00:00,comment,chavinlo/alpaca-native,what?
+lover99,2023-04-12 18:49:46+00:00,comment,chavinlo/alpaca-native,"I also find this batch generation problem and have no idea how to handle it, your solution works for me, thanks a lot!"
+christangttt,2023-08-08 06:03:37+00:00,comment,chavinlo/alpaca-native,Thank you! This also fixes my bug on LLaMa. 
+DongfuJiang,2023-04-10 16:55:54+00:00,comment,chavinlo/alpaca-native,"I guess you might need the latest `transformers` package of github version, i.e. install from source."
+SirWaffle,2023-03-28 22:38:49+00:00,comment,chavinlo/alpaca-native,"I figured it out myself - it appears to be an issue with the generation params, which were good for other models, but seemed to end up working poorly with this model. Ended up with very good results and no missing spaces using:
+
+                temperature: 0.2,
+                top_p: 0.75,
+                top_k: 40,
+                num_beams: 1,
+                no_repeat_ngram_size: 3,
+                repetition_penalty: 1.2,
+                encoder_repetition_penalty: 1.0, 
+                typical_p: 1.0,
+                length_penalty: 1.2,
+                do_sample: true,"
+Expedition,2023-04-12 15:52:52+00:00,comment,chavinlo/alpaca-native,Can you provide some code examples that use this model to do generation?
+chavinlo,2023-03-25 20:34:30+00:00,comment,chavinlo/alpaca-native,https://github.com/tatsu-lab/stanford_alpaca
+HDiffusion,2023-03-23 02:09:48+00:00,comment,chavinlo/alpaca-native,"With cpu offloading in the textgen webui it should work fine. If you quantize it to 4bit you should be able to fit the whole thing on your gpu. The reason the model is so big is because it's saved in 32bit, it will only be run in 16bit at most for inference."
+kz919,2023-04-10 01:02:37+00:00,comment,chavinlo/alpaca-native,"I tested load_in_8bit=True, but it seems it spells out only nonsenses. It would be great if we could figure out how to do int8 quantization on this, it will make things even faster.
+But it will fit on 10GB 3080, once you use that flag. The current memory consumption is around 14GB with fp16/bf16, and with int8 it will be cut in half."
+TheAIGuyz,2023-03-21 16:53:17+00:00,comment,chavinlo/alpaca-native,"@thomasburnerdo 
+
+This is a good place to start: https://github.com/oobabooga/text-generation-webui/tree/45b7e53565ee0151cdbe2aa5760cfdf05f696d5c"
+chavinlo,2023-03-20 16:52:42+00:00,comment,chavinlo/alpaca-native,either that or I need to change LLaMa to llama
+Man0warable,2023-03-21 00:40:08+00:00,comment,chavinlo/alpaca-native,tokenizer_class in tokenizer_config.json needs to be changed to: LlamaTokenizer
+chavinlo,2023-03-21 00:53:03+00:00,comment,chavinlo/alpaca-native,"> The model_type 'llama' is not recognized. It could be a bleeding edge model, or incorrect"
+jjjone,2023-03-27 13:54:35+00:00,comment,chavinlo/alpaca-native,"Is it normal for the model to sometimes just to parrot the prompt with no additional text? Or is there a trick to setting the temperature, num_beams, top_p, etc.? I find it's hit and miss."
+TaiyouIllusion,2023-03-20 06:07:48+00:00,comment,chavinlo/alpaca-native,"I quantized the model in google colab and tested it with alpaca.cpp. The quality is a bit improved compared to lora merged version.
+I made a magnet link for the quantized version of this (file type is .bin).  @chavinlo Can I share the link on github?"
+TaiyouIllusion,2023-03-20 06:08:44+00:00,comment,chavinlo/alpaca-native,The format is ggml.
+chavinlo,2023-03-20 16:53:09+00:00,comment,chavinlo/alpaca-native,"> I quantized the model in google colab and tested it with alpaca.cpp. The quality is a bit improved compared to lora merged version.
+> I made a magnet link for the quantized version of this (file type is .bin).  @chavinlo Can I share the link on github?
+
+sure or you can do it here and I can link it on the readme"
+TaiyouIllusion,2023-03-21 01:04:56+00:00,comment,chavinlo/alpaca-native,"Thanks! Here's the link(sorry if it was too long, I used online generator):
+
+magnet:?xt=urn:btih:69fb9b4c1e0888336f5253ae75d3e10a9299ab7d&dn=ggml-alpaca-7b-native-q4.bin&tr=http%3A%2F%2F125.227.35.196%3A6969%2Fannounce&tr=http%3A%2F%2F210.244.71.25%3A6969%2Fannounce&tr=http%3A%2F%2F210.244.71.26%3A6969%2Fannounce&tr=http%3A%2F%2F213.159.215.198%3A6970%2Fannounce&tr=http%3A%2F%2F37.19.5.139%3A6969%2Fannounce&tr=http%3A%2F%2F37.19.5.155%3A6881%2Fannounce&tr=http%3A%2F%2F46.4.109.148%3A6969%2Fannounce&tr=http%3A%2F%2F87.248.186.252%3A8080%2Fannounce&tr=http%3A%2F%2Fasmlocator.ru%3A34000%2F1hfZS1k4jh%2Fannounce&tr=http%3A%2F%2Fbt.evrl.to%2Fannounce&tr=http%3A%2F%2Fbt.rutracker.org%2Fann&tr=https%3A%2F%2Fwww.artikelplanet.nl&tr=http%3A%2F%2Fmgtracker.org%3A6969%2Fannounce&tr=http%3A%2F%2Fpubt.net%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.baravik.org%3A6970%2Fannounce&tr=http%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.filetracker.pl%3A8089%2Fannounce&tr=http%3A%2F%2Ftracker.grepler.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.mg64.net%3A6881%2Fannounce&tr=http%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.torrentyorg.pl%2Fannounce&tr=https%3A%2F%2Finternet.sitelio.me%2F&tr=https%3A%2F%2Fcomputer1.sitelio.me%2F&tr=udp%3A%2F%2F168.235.67.63%3A6969&tr=udp%3A%2F%2F182.176.139.129%3A6969&tr=udp%3A%2F%2F37.19.5.155%3A2710&tr=udp%3A%2F%2F46.148.18.250%3A2710&tr=udp%3A%2F%2F46.4.109.148%3A6969&tr=udp%3A%2F%2Fcomputerbedrijven.bestelinks.nl%2F&tr=udp%3A%2F%2Fcomputerbedrijven.startsuper.nl%2F&tr=udp%3A%2F%2Fcomputershop.goedbegin.nl%2F&tr=udp%3A%2F%2Fc3t.org&tr=udp%3A%2F%2Fallerhandelenlaag.nl&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969"
+heartyhotdish,2023-03-21 01:38:35+00:00,comment,chavinlo/alpaca-native,"Thank you so much for this.  I can confirm that the quantized native model from Taiyouillusion's magnet link is legit.  Running on alpaca.cpp, it's a big leap forward in response quality compared to the 7B or 13B alpaca-lora models.  What a time to be alive!"
+gorbypark,2023-03-21 15:07:48+00:00,comment,chavinlo/alpaca-native,"> The format is ggml.
+
+Can you share how you converted the post-trained HF weights back into the standard llama format, for conversion to ggml? Or did you go direct from HF to ggml somehow?  I got hung up on a few things, one being that convert-pth-to-ggml.py (from llama.cpp) calls numpy().squeeze() on the data which does not support bfloat16, which alpaca uses.  That was a quick fix (not sure if my hack would affect anything, but anyways), but quantize step then fails.  From some sleuthing around, it seems like there needs to be a conversion step after the fine tuning to get the weights back into the standard llama format."
+TaiyouIllusion,2023-03-21 16:47:56+00:00,comment,chavinlo/alpaca-native,I uploaded the script I used in colab to convert the HF model on github: https://github.com/taiyou2000/alpaca-convert-colab/blob/main/alpaca-convert-colab-fixed.ipynb.
+okram,2023-03-21 18:16:54+00:00,comment,chavinlo/alpaca-native,"> I uploaded the script I used in colab to convert the HF model on github: https://github.com/taiyou2000/alpaca-convert-colab/blob/main/alpaca-convert-colab-fixed.ipynb.
+
+when I try running this script, I get first an error about accelerate missing and after installing that, I  get:
+```
+NameError                                 Traceback (most recent call last)
+
+<ipython-input-4-bd7436545f55> in <module>
+      8 tokenizer = LLaMATokenizer.from_pretrained(""decapoda-research/llama-7b-hf"")
+      9 
+---> 10 base_model = LLaMAForCausalLM.from_pretrained(
+     11     ""chavinlo/alpaca-native"",
+     12     load_in_8bit=False,
+
+/usr/local/lib/python3.9/dist-packages/transformers/modeling_utils.py in from_pretrained(cls, pretrained_model_name_or_path, *model_args, **kwargs)
+   2488             init_contexts = [deepspeed.zero.Init(config_dict_or_path=deepspeed_config())] + init_contexts
+   2489         elif load_in_8bit or low_cpu_mem_usage:
+-> 2490             init_contexts.append(init_empty_weights())
+   2491 
+   2492         with ContextManagers(init_contexts):
+
+NameError: name 'init_empty_weights' is not defined
+```
+Any hints on fixing this?"
+blackle,2023-03-24 02:34:59+00:00,comment,chavinlo/alpaca-native,"Because the upstream llama.cpp repository recently changed the quantized ggml format, any old q4.bin files will stop working, so I had to requantize this. I did manage to get it working. I had to remove the ""accelerate"" pip3 package, and use a colab runtime with a lot of ram. I was constantly almost running out of disk space while doing the conversion, I *just* managed to convert it.
+
+here's the magnet link: magnet:?xt=urn:btih:0e51003c8a5610aa713f675891f0a7f87051be1a&dn=ggml-alpaca-7b-native-q4.bin&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce
+
+sometimes I find that a magnet link won't work unless a few people have downloaded thru the actual torrent file. you can find it at ""suricrasia dot online slash stuff slash ggml-alpaca-7b-native-q4 dot bin dot torrent dot txt"" just replace ""dot"" with ""."" and ""slash"" with ""/"""
+Black-Engineer,2023-03-24 12:10:08+00:00,comment,chavinlo/alpaca-native,"> Because the upstream llama.cpp repository recently changed the quantized ggml format, any old q4.bin files will stop working, so I had to requantize this. I did manage to get it working. I had to remove the ""accelerate"" pip3 package, and use a colab runtime with a lot of ram. I was constantly almost running out of disk space while doing the conversion, I *just* managed to convert it.
+> 
+> here's the magnet link: magnet:?xt=urn:btih:0e51003c8a5610aa713f675891f0a7f87051be1a&dn=ggml-alpaca-7b-native-q4.bin&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce
+> 
+> sometimes I find that a magnet link won't work unless a few people have downloaded thru the actual torrent file. you can find it at ""suricrasia dot online slash stuff slash ggml-alpaca-7b-native-q4 dot bin dot torrent dot txt"" just replace ""dot"" with ""."" and ""slash"" with ""/""
+
+Can u post what you changed in google colab?"
+blackle,2023-03-24 21:00:06+00:00,comment,chavinlo/alpaca-native,"I actually didn't need to change anything, I just had to run with google colab pro. if you don't, it will ask you to install the ""accelerate"" package, and that's where the error comes from."
+kz919,2023-03-18 05:02:52+00:00,comment,chavinlo/alpaca-native,"Never mind you need the instruction template to make it work, but the weird thing is all the generation ends up with </s>, which is super weird."
+mikeliu,2023-04-02 05:50:30+00:00,comment,chavinlo/alpaca-native,same issure
+baby1,2023-03-18 13:42:07+00:00,comment,chavinlo/alpaca-native,Great
+baby1,2023-03-17 12:17:26+00:00,comment,chavinlo/alpaca-native,Looking forward the final checkpoint.
+eepos,2023-03-17 14:46:22+00:00,comment,chavinlo/alpaca-native,"> Looking forward the final checkpoint.
+
+Looks like training is has been paused/stopped. Just a guess but maybe checkpoint-800 is as final as it'll get."
+chavinlo,2023-03-17 16:09:20+00:00,comment,chavinlo/alpaca-native,"> > Looking forward the final checkpoint.
+> 
+> Looks like training is has been paused/stopped. Just a guess but maybe checkpoint-800 is as final as it'll get.
+
+The latest checkpoint is 800/1200, I would continue training but it's simply too slow (60s/it) for some reason. If anybody has a solution to this problem let me know, I would be happy to let these 4xA100 continue working or even train larger models such as 30B with more gpus. More info: https://github.com/tatsu-lab/stanford_alpaca/issues/32"
+chavinlo,2023-03-17 18:50:49+00:00,comment,chavinlo/alpaca-native,Got it fixed...
+chavinlo,2023-03-18 00:52:04+00:00,comment,chavinlo/alpaca-native,"there it is, uploaded the full model"
+teknium,2023-10-15 02:12:21+00:00,comment,NousResearch/Llama-2-7b-hf,"> I am seeing tiny differences in the FFN hence the performance does also not match exactly w/ meta-llama/Llama-2-7b-hf
+
+Whats the cause?"
+alpindale,2023-10-20 11:01:00+00:00,comment,NousResearch/Llama-2-7b-hf,"I just checked the checkpoint hashes and they all seem to match. The meta-llama repo updated the pytorch binaries with FP16 variants, but I matched the ones here (FP32) against the older commits:
+
+### PyTorch bins
+[ckpt 1 - Nous](https://huggingface.co/NousResearch/Llama-2-7b-hf/blob/main/pytorch_model-00001-of-00003.bin) / [ckpt 1 - meta](https://huggingface.co/meta-llama/Llama-2-7b-hf/blob/5373729fe54540a2dc9f5ccabbea20adafe021b7/pytorch_model-00001-of-00003.bin)
+[ckpt 2 - Nous](https://huggingface.co/NousResearch/Llama-2-7b-hf/blob/main/pytorch_model-00002-of-00003.bin) / [ckpt 2 - meta](https://huggingface.co/meta-llama/Llama-2-7b-hf/blob/5373729fe54540a2dc9f5ccabbea20adafe021b7/pytorch_model-00002-of-00003.bin)
+[ckpt 3 - Nous](https://huggingface.co/NousResearch/Llama-2-7b-hf/blob/main/pytorch_model-00003-of-00003.bin) / [ckpt 3 - meta](https://huggingface.co/meta-llama/Llama-2-7b-hf/blob/5373729fe54540a2dc9f5ccabbea20adafe021b7/pytorch_model-00003-of-00003.bin)
+
+### Safetensors
+[ckpt 1 - Nous](https://huggingface.co/NousResearch/Llama-2-7b-hf/blob/main/model-00001-of-00002.safetensors) / [ckpt 1 - meta](https://huggingface.co/meta-llama/Llama-2-7b-hf/blob/main/model-00001-of-00002.safetensors)
+[ckpt 2 - Nous](https://huggingface.co/NousResearch/Llama-2-7b-hf/blob/main/model-00002-of-00002.safetensors) / [ckpt 2 - meta](https://huggingface.co/meta-llama/Llama-2-7b-hf/blob/main/model-00002-of-00002.safetensors)
+
+I'd perhaps recommend swapping the misc files (such as the JSON files) with the official ones in the meta repo.
+"
+Wauplin,2023-10-06 09:20:44+00:00,comment,NousResearch/Llama-2-7b-hf,"Hey @ThankGod, thanks for the PR. When license is set to llama2, there is no need to set additional license_name and license_link as the llama2 license is already officially supported on the Hub 🤗"
+teknium,2023-08-21 19:27:39+00:00,comment,NousResearch/Llama-2-7b-hf,I dont think you need to change the model files to take advantage of changes in HF Transformers implementation of the model
+float-trip,2023-08-21 22:02:43+00:00,comment,NousResearch/Llama-2-7b-hf,"Oh sorry, to clarify - I'm referring to changes the HF team has made to the model repos, not `transformers`.
+
+It seems like a lot of tutorials use these mirrors, which is causing difficult-to-debug problems like the improper tokenization of `</s>` above.
+
+(Out of curiosity - I noticed the [mirror for the 7b chat model](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf) is 404ing now. Did you guys delete it, or was it taken down?)"
+teknium,2023-08-21 22:17:11+00:00,comment,NousResearch/Llama-2-7b-hf,"> Oh sorry, to clarify - I'm referring to changes the HF team has made to the model repos, not `transformers`.
+> 
+> It seems like a lot of tutorials use these mirrors, which is causing difficult-to-debug problems like the improper tokenization of `</s>` above.
+> 
+> (Out of curiosity - I noticed the [mirror for the 7b chat model](https://huggingface.co/NousResearch/Llama-2-7b-chat-hf) is 404ing now. Did you guys delete it, or was it taken down?)
+
+@LDJnr and me figured no one would want to train over that model so privated it to clean up, do you use it?"
+float-trip,2023-08-21 22:31:45+00:00,comment,NousResearch/Llama-2-7b-hf,"Nah, just curious. Others apparently use it (someone was asking questions about a Colab which uses it in TheBloke's Discord earlier today, and others are using it in the reddit thread I linked above) but I agree, finetuning an RLHF'd model is probably not ideal."
+float-trip,2023-08-22 05:33:36+00:00,comment,NousResearch/Llama-2-7b-hf,"re: the original issue, though - lmk if it makes sense why I'm suggesting you re-mirror the updated version or if I should clarify anything"
+developerZoyal,2023-08-22 15:05:19+00:00,comment,NousResearch/Llama-2-7b-hf,@teknium  can you pls upload the 7b chat model again?
+teknium,2023-08-27 19:53:34+00:00,comment,NousResearch/Llama-2-7b-hf,"> @teknium  can you pls upload the 7b chat model again?
+
+ok fine"
+teknium,2023-08-27 19:54:08+00:00,comment,NousResearch/Llama-2-7b-hf,done
+developerZoyal,2023-08-28 14:21:19+00:00,comment,NousResearch/Llama-2-7b-hf,@teknium  Thank you very much
+cnut1648,2023-07-21 15:15:42+00:00,comment,NousResearch/Llama-2-7b-hf,"@Hambaobao yeah I had this issue too when I wrote a script to pad my datasets in `max_model_length`, boy that was insane to have `1000000000000000019884624838656` length. I made a pull request in https://huggingface.co/NousResearch/Llama-2-7b-hf/discussions/2/files to make it 4k"
+teknium,2023-07-21 17:22:48+00:00,comment,NousResearch/Llama-2-7b-hf,"It doesn't actually matter so long as its 4096 or greater, but it is confusing. Updating"
+TheBloke,2023-07-20 08:14:14+00:00,comment,TheBloke/Llama-2-7B-fp16,"Yeah I've seen that a few times in multi-GPU situations with unquantised models. I'm afraid I don't know what causes it, but I don't believe it's specific to these files as I've seen it with several Llama models.  It might be a Transformers bug."
+Rapidinnovation,2023-07-20 05:47:36+00:00,comment,TheBloke/Llama-2-7B-fp16,This comment has been hidden
+vikhyatk,2024-04-10 03:16:32+00:00,comment,vikhyatk/moondream1,"There is probably something wrong with your environment, the latest version of timm supports this SigLIP model. Alternately you can switch to moondream2, where the latest release has removed the dependency on timm. https://huggingface.co/vikhyatk/moondream2"
+vikhyatk,2024-03-06 07:48:51+00:00,comment,vikhyatk/moondream1,"There was a backward incompatible change to the KV cache introduced in the 4.38.0 release of transformers. Three options:
+
+1. Use [moondream2](https://huggingface.co/vikhyatk/moondream2), where the issue is fixed.
+2. Downgrade transformers to 4.37.2.
+3. Try the patch mentioned [here](https://github.com/vikhyat/moondream/issues/50#issuecomment-1971789438)."
+vikhyatk,2024-02-24 16:55:46+00:00,comment,vikhyatk/moondream1,Can you try upgrading timm (python package)?
+YaTharThShaRma999,2024-02-06 23:51:58+00:00,comment,vikhyatk/moondream1,"@Tarunasnani it should roughly take 6gb of ram/vram.
+
+With device map you can probably offload some to cpu and run it but it will be pretty slow.
+
+You can also use bitsandbytes to quantize it to 8 bits and it will only take like 4gb vram and will be faster."
+shadow,2024-02-08 03:41:01+00:00,comment,vikhyatk/moondream1,"You can use ComfyUI to run it.https://github.com/shadowcz007/comfyui-moondream
+
+"
+vikhyatk,2024-02-02 07:40:48+00:00,comment,vikhyatk/moondream1,Oversight on my part. They were trained in 16 bit precision so no reason for the weights to be 32 bit here. Will try to fix soon. 
+vikhyatk,2024-02-07 02:40:16+00:00,comment,vikhyatk/moondream1,Updated to fp16!
+vikhyatk,2024-02-07 02:40:54+00:00,comment,vikhyatk/moondream1,Where are you seeing that?
+not-lain,2024-01-31 17:54:09+00:00,comment,vikhyatk/moondream1,"after you merge this, you can call the pipeline using the following code
+```python
+from transformers import pipeline
+pipe = pipeline(model=""vikhyatk/moondream1"", trust_remote_code=True)
+pipe(""Image_path"",question=""question"")
+```
+"
+not-lain,2024-01-31 18:32:10+00:00,comment,vikhyatk/moondream1,"you can also **test before merging** using the following code 
+```python
+from transformers import pipeline
+pipe = pipeline(model=""vikhyatk/moondream1"",revision=""refs/pr/6"",trust_remote_code=True)
+pipe(""Image_path"",question=""question"")
+```
+or you can use 
+```python
+from PIL import Image
+from transformers import pipeline
+pipe = pipeline(model=""vikhyatk/moondream1"",revision=""refs/pr/6"",trust_remote_code=True)
+im = Image.open(""Image_path"")
+pipe(im,question=""question"")
+```"
+sujitvasanth,2024-02-04 19:47:24+00:00,comment,vikhyatk/moondream1,how do you get streaming text from pipeline?
+not-lain,2024-02-04 23:58:11+00:00,comment,vikhyatk/moondream1,"I'll try to adapt the pipeline to support text streaming soon.
+until then i'll leave this blogpost here for anyone who wants to learn about building custom architectures and wants to help with the text streaming feature: https://huggingface.co/blog/not-lain/custom-architectures-with-huggingface"
+sujitvasanth,2024-02-05 01:17:47+00:00,comment,vikhyatk/moondream1,"transformers stream generator library works great for pure transformers but actually when Iooked at the source code not straight forward at all! But perhaps makes a difficult thing under the hood appear easy to the likes of myself!
+https://pypi.org/project/transformers-stream-generator/0.0.4/
+https://github.com/sujitvasanth/streaming-LLM-chat
+
+the second is my really simple streaming implementation using stream-generation library."
+not-lain,2024-02-08 20:57:23+00:00,comment,vikhyatk/moondream1,@vikhyatk can I have a review on this one ?
+sujitvasanth,2024-02-10 05:30:42+00:00,comment,vikhyatk/moondream1,@not-lain have you posted you pipeline changes at his github? https://github.com/vikhyat/moondream I raised it as an issue to hopefully get it done
+not-lain,2024-02-10 13:55:43+00:00,comment,vikhyatk/moondream1,"no I have not, but thanks for raising that issue,I really loved the model which is why I added a pipeline method to it for easier access. 
+All code in this pull request is open source, and I will leave you guys to handle the rest"
+vikhyatk,2024-02-13 17:15:58+00:00,comment,vikhyatk/moondream1,"There's a weird bug I'm running into with the tokenizer in my deploy script, will have this merged once I get that resolved! Sorry for the delay."
+Ilonejeroen,2024-01-31 19:27:46+00:00,comment,vikhyatk/moondream1,"you can read my mind, will be great yes"
+neph1,2024-02-01 08:34:05+00:00,comment,vikhyatk/moondream1,"Unless someone beats me to it, I might take a stab at this and also quantizing it, this weekend. Don't know if it's possible, but I'll give it a shot.
+I don't know what to do with the vision model, though. Does anyone have more info on that? I've extracted the KV from it, but not sure how to proceed after that."
+oliverbob,2024-03-02 05:24:41+00:00,comment,vikhyatk/moondream1,Any update yet about the GGUF?
+jarvis911,2024-01-29 21:57:19+00:00,comment,vikhyatk/moondream1,"contact me , lets train models together .
+"
+fhai50032,2024-01-30 23:13:39+00:00,comment,vikhyatk/moondream1,"> contact me , lets train models together .
+
+Sorry to tag you , but Is it possible to teach me too ? I want to learn about Multimodal LLM from scratch and fine-tuning 
+Thanks "
+choltha,2024-01-31 08:27:46+00:00,comment,vikhyatk/moondream1,Maybe you can find what you need in the Space's app-Code: https://huggingface.co/spaces/vikhyatk/moondream1/blob/main/app.py
+vikhyatk,2024-01-27 23:13:09+00:00,comment,vikhyatk/moondream1,"There’s no reason it can’t be quantized, I just don’t know how to do it 😭😭
+
+What tool do people typically use to quantize models? Is there a good tutorial that explains how to do it?"
+CyberTimon,2024-01-27 23:17:00+00:00,comment,vikhyatk/moondream1,"Hey
+
+Thanks for the fast response. Most people quantize it with either [llama.cpp ](https://github.com/ggerganov/llama.cpp) or [AutoGPTQ](https://github.com/AutoGPTQ/AutoGPTQ).
+It's already quite late for me so but I will definitly try to quantize it tomorrow and run it in my pipeline. The model is really amazing. It works better than llava 7 or even 13b in my early tests. 
+
+Maybe it works out of the box with bitsandbytes transformers quantization support, let me check tomorrow. I will tell you if it worked or not. 
+
+Thanks, you created an amazing model!"
+CyberTimon,2024-01-28 10:59:49+00:00,comment,vikhyatk/moondream1,https://github.com/vikhyat/moondream/issues/26#issuecomment-1913554783
+sujitvasanth,2024-01-28 14:43:30+00:00,comment,vikhyatk/moondream1,this is an amazing model it works fast on my rtx 3090 . It would be helpful to have a quantized model although the footprint is small already.
+akashicmarga,2024-01-31 07:39:37+00:00,comment,vikhyatk/moondream1,@CyberTimon  did you try quantizing using llama.cpp ? this model works really fast and accurate enough for personal use on my mac. I was trying out on raspberry pi but process gets killed due to size. I think ggml will be helpful here just like they have llava quantised version which works on 8gb raspi but with 1.5 tokens/sec. This should work really fast. 
+CyberTimon,2024-01-31 17:41:24+00:00,comment,vikhyatk/moondream1,Nope I didn't test it as it's built different than other llava models. Because of that I didn't even try it. 
+dyoung,2024-02-04 16:24:13+00:00,comment,vikhyatk/moondream1,"https://huggingface.co/vikhyatk/moondream1/discussions/8
+
+Sounds like vikhyatk is already working to correct the oversight of using fp32 instead of fp16 when merging the models. The model was larger then necessary to begin with. This should drop the size of this models base. Which will be nice. Then quantization would give even further benefits after supplying fp16."
+jyb89,2024-06-05 06:42:36+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"I have the same problem and I solved it, but I couldn't reenact it in another place.
+In my case, I think I solved it by installing a package I needed while installing 'vllm'.
+
+Below is environment of can fast working
+
+cuda : 12.2
+nvidia-driver : 535.171.04
+GPU: nvidia titan rtx d6 * 2ea
+
+python packages:
+autoawq==0.2.4
+autoawq_kernels==0.0.6
+tokenizers==0.19.1
+torch==2.2.1
+torchsummary==1.5.1
+vllm==0.4.1
+vllm_nccl_cu12==2.18.1.0.3.0
+transformers==4.40.1"
+casperhansen,2024-04-20 17:27:44+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"Please have a look at AutoAWQ
+https://github.com/casper-hansen/AutoAWQ"
+thangpd-ftech,2024-05-08 05:19:51+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"@casperhansen  Can you share the config that you used to quantize this model, do you just use the default config? What is the data that you used for calibration?"
+mattmalcher,2024-06-07 09:12:16+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"Struggled a bit with quantisation, made some notes on what worked for me here: https://huggingface.co/mattmalcher/Llama-3-70B-Instruct-awq"
+Wizd,2024-04-20 06:23:32+00:00,comment,casperhansen/llama-3-70b-instruct-awq,need 0.4.1
+PartTimePhilosopher,2024-04-20 09:28:09+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"but 0.4.1 is not out yet? only 0.4.0.post1?
+> need 0.4.1
+
+"
+zoltan-fedor,2024-04-20 13:19:09+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"vllm 0.4.1 is in ""pre-release"", see https://github.com/vllm-project/vllm/releases"
+zoltan-fedor,2024-04-20 14:19:30+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"It does seem to run on v0.4.0.post1, as the `generation_config.json` has the updated `eos_token`, see https://github.com/vllm-project/vllm/issues/4180#issuecomment-2066187578"
+casperhansen,2024-04-20 17:28:34+00:00,comment,casperhansen/llama-3-70b-instruct-awq,Some versions of vLLM have issues with quantized models. v0.4.0.post1 is the latest that I have confirmed to work personally.
+zoltan-fedor,2024-04-20 17:34:30+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"I've just built a docker image for the latest vLLM (for their dev version, so it is v0.4.1.dev, see https://hub.docker.com/r/aiappsref/vllm/tags) and I have just tested it with this quantized model and it seems to be working.
+It actually works better than v0.4.0.post1, as that was not finishing its response at the EOS but kept going (that was a known bug fixed in v0.4.1)"
+stlkcmrd,2024-04-26 07:35:50+00:00,comment,casperhansen/llama-3-70b-instruct-awq,I still have it on 0.4.1
+hmellor,2024-04-19 16:04:49+00:00,comment,casperhansen/llama-3-70b-instruct-awq,Add missing EOS token as is now present in the un-quantised config https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct/blob/main/generation_config.json
+bayraktaroglu,2024-04-19 12:05:03+00:00,comment,casperhansen/llama-3-70b-instruct-awq,"put both eos tokens as stopping criteria i`d suggest.
+"
+adrianlyjak,2024-04-19 13:16:00+00:00,comment,casperhansen/llama-3-70b-instruct-awq,See related merged PR on the meta-llama repo https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/discussions/4. That change to the tokenizer basically just needs to be done here as well
+hmellor,2024-04-19 16:05:40+00:00,comment,casperhansen/llama-3-70b-instruct-awq,I've made a PR for it https://huggingface.co/casperhansen/llama-3-70b-instruct-awq/discussions/2
+casperhansen,2024-04-19 21:20:35+00:00,comment,casperhansen/llama-3-70b-instruct-awq,Fixed!
+MaziyarPanahi,2024-06-06 17:54:16+00:00,comment,MaziyarPanahi/Qwen2-7B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-06-06 17:54:16+00:00,comment,MaziyarPanahi/Qwen2-7B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+Yhyu13,2023-12-02 19:13:43+00:00,comment,Qwen/Qwen-Audio-Chat,"Would you mention the quantization method in the readme? It is likely autogptq, just speculating, I haven't quant Qwen before"
+xun,2023-12-03 02:03:58+00:00,comment,Qwen/Qwen-Audio-Chat,"yeh
+```
+from transformers import AutoTokenizer, TextGenerationPipeline
+from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
+import logging
+
+logging.basicConfig(
+    format=""%(asctime)s %(levelname)s [%(name)s] %(message)s"", level=logging.INFO, datefmt=""%Y-%m-%d %H:%M:%S""
+)
+
+pretrained_model_dir = ""Qwen-Audio-Chat""
+quantized_model_dir = ""Qwen-Audio-Chat-Int4""
+
+tokenizer = AutoTokenizer.from_pretrained(pretrained_model_dir, use_fast=True,trust_remote_code=True)
+examples = [
+    tokenizer(
+        ""auto-gptq is an easy-to-use model quantization library with user-friendly apis, based on GPTQ algorithm.""
+    )
+]
+
+quantize_config = BaseQuantizeConfig(
+    bits=4,  # quantize model to 4-bit
+    group_size=128,  # it is recommended to set the value to 128
+    desc_act=False,  # set to False can significantly speed up inference but the perplexity may slightly bad
+    damp_percent=0.01,
+    static_groups=False,
+    sym=True,
+    true_sequential=True
+)
+
+# load un-quantized model, by default, the model will always be loaded into CPU memory
+model = AutoGPTQForCausalLM.from_pretrained(pretrained_model_dir, quantize_config,trust_remote_code=True)
+
+# quantize model, the examples should be list of dict whose keys can only be ""input_ids"" and ""attention_mask""
+model.quantize(examples)
+
+# save quantized model
+model.save_quantized(quantized_model_dir)
+
+# save quantized model using safetensors
+#model.save_quantized(quantized_model_dir, use_safetensors=True)
+
+# push quantized model to Hugging Face Hub.
+# to use use_auth_token=True, Login first via huggingface-cli login.
+# or pass explcit token with: use_auth_token=""hf_xxxxxxx""
+# (uncomment the following three lines to enable this feature)
+# repo_id = f""YourUserName/{quantized_model_dir}""
+# commit_message = f""AutoGPTQ model for {pretrained_model_dir}: {quantize_config.bits}bits, gr{quantize_config.group_size}, desc_act={quantize_config.desc_act}""
+# model.push_to_hub(repo_id, commit_message=commit_message, use_auth_token=True)
+
+# alternatively you can save and push at the same time
+# (uncomment the following three lines to enable this feature)
+# repo_id = f""YourUserName/{quantized_model_dir}""
+# commit_message = f""AutoGPTQ model for {pretrained_model_dir}: {quantize_config.bits}bits, gr{quantize_config.group_size}, desc_act={quantize_config.desc_act}""
+# model.push_to_hub(repo_id, save_dir=quantized_model_dir, use_safetensors=True, commit_message=commit_message, use_auth_token=True)
+
+# load quantized model to the first GPU
+model = AutoGPTQForCausalLM.from_quantized(quantized_model_dir, device=""cuda:0"",trust_remote_code=True)
+
+# download quantized model from Hugging Face Hub and load to the first GPU
+# model = AutoGPTQForCausalLM.from_quantized(repo_id, device=""cuda:0"", use_safetensors=True, use_triton=False)
+
+# inference with model.generate
+print(tokenizer.decode(model.generate(**tokenizer(""auto_gptq is"", return_tensors=""pt"").to(model.device))[0]))
+
+# or you can also use pipeline
+pipeline = TextGenerationPipeline(model=model, tokenizer=tokenizer)
+print(pipeline(""auto-gptq is"")[0][""generated_text""])
+```"
+Yhyu13,2023-12-03 08:47:47+00:00,comment,Qwen/Qwen-Audio-Chat,Thansk for sharing it! I appreciate it
+interstellarninja,2024-05-21 18:17:35+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,Thanks for the PR Matt — this is super useful for models that support tool-use like Hermes-2-Pro. Will test it out soon! 👏
+bartowski,2024-05-15 13:21:21+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"why ?
+"
+trieudemo11,2024-05-13 13:41:18+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,Shouldn't store adapter_config.json and config.json in the same folder.
+YaTharThShaRma999,2024-05-09 19:53:18+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"@xzuyn 
+thats actually the official llama 3's fault. For some reason, it has lots of extra reserved tokens and that  <|eot_id|> issue. "
+xzuyn,2024-05-10 00:18:55+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"> @xzuyn 
+> thats actually the official llama 3's fault. For some reason, it has lots of extra reserved tokens and that  <|eot_id|> issue.
+
+It's not though. The official one has 1 [`<|eot_id|>` at `ID 128009`](https://huggingface.co/meta-llama/Meta-Llama-3-8B/blob/main/tokenizer_config.json#L75), but Nous [renamed it to `<|eot_id>`](https://huggingface.co/NousResearch/Hermes-2-Pro-Llama-3-8B/blob/main/tokenizer_config.json#L75) and [added `<|eot_id|>` here](https://huggingface.co/NousResearch/Hermes-2-Pro-Llama-3-8B/blob/main/tokenizer_config.json#L2051). The official one only has reserved tokens up to [`<|reserved_special_token_250|>` at `ID 128255`](https://huggingface.co/meta-llama/Meta-Llama-3-8B/blob/main/tokenizer_config.json#L2043), while Nous adds more starting from [here](https://huggingface.co/NousResearch/Hermes-2-Pro-Llama-3-8B/blob/main/tokenizer_config.json#L2059) to [here](https://huggingface.co/NousResearch/Hermes-2-Pro-Llama-3-8B/blob/main/tokenizer_config.json#L2299). That's why I made this discussion page."
+MLDataScientist,2024-05-17 17:41:55+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"Hi @teknium, 
+Following up on this.
+Can you please share the Axolotl Configs settings? Thanks!"
+teknium,2024-05-08 11:41:19+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"> Hello.
+> 
+> I've been trying to use this model for writing summaries. I've loaded it into oobabooga text generation web ui, then on default page made this prompt:
+> 
+>     You are an AI assistant that converts complicated image descriptions into compiled descriptive captions.
+>     
+>     ### Instruction:
+>     1. Caption should be in third person. 
+>     2. Caption should be single sentence.
+>     3. Do not use word ""Character"".
+>     
+>     ### Input:
+>     Description: The image showcases three animated characters in a room with bookshelves in the background. The character on the left has black hair and is smiling, the one in the center has red hair and is looking surprised, and the character on the right has purple hair and is partially visible.
+>     
+>     ### Response:
+> 
+> When I click on generate, it goes insane. It start generate texts without stopping and keeps ""talking"" with itself until it exhausts all it's `max_new_tokens` param value.
+> 
+> Sometimes it breaks completely and starts writing giant texts on Korean.
+> 
+> I've loaded this model into oobabooga with default settings.
+
+You're using the wrong prompt format. See the model card to understand the format, it is chatml, not alpaca."
+daniq,2024-05-08 12:15:31+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,@teknium I thought that default page of text generation web ui already includes this prompt format implicitly. Thank you.
+teknium,2024-05-02 21:04:30+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,ty
+teknium,2024-05-02 21:05:45+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,Ok
+teknium,2024-05-02 21:05:22+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"> Whatever I do the answer is just the arguments, not surrounded by tool_call tags, so that the function call is not parsed.
+
+Try now I removed those as being special tokens.
+
+Or in your inference, use `decode(generated_chat[0], skip_special_tokens=False, clean_up_tokenization_space=False)` "
+4n8,2024-05-03 05:34:53+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"GGUF version from you guys also has this issue
+
+edit: apparently its in the works
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/662152974991d64ad0e43bcd/9lDQWQ86WwAMH7FpsjKjS.png)
+"
+teknium,2024-05-08 11:42:00+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"> GGUF version from you guys also has this issue
+> 
+> edit: apparently its in the works
+> ![image.png](https://cdn-uploads.huggingface.co/production/uploads/662152974991d64ad0e43bcd/9lDQWQ86WwAMH7FpsjKjS.png)
+
+Its already updated now, try again."
+mclassHF2023,2024-05-06 18:54:56+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"I've used `alpha_value` = 2.5 and it seems to run pretty well on a 5bit exl2 version with 16k context. But I haven't run a ton of tests, just my own primitive needle in the haystack kind of test and some logic and json questions."
+interstellarninja,2024-05-15 06:56:58+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,is there instructions on how to configure function calling for Heremes-2-Pro with LocalAI?
+fakezeta,2024-05-15 18:01:56+00:00,comment,NousResearch/Hermes-2-Pro-Llama-3-8B,"Support for function calling on transformers Is in this [PR](https://github.com/mudler/LocalAI/pull/2328) with example instruction.
+
+I still haven't had the chance to test it: will report here as soon as possible."
+Wauplin,2023-10-06 09:20:00+00:00,comment,NousResearch/Llama-2-13b-hf,"Hey @ThankGod, thanks for the PR. When license is set to `llama2`, there is no need to set additional `license_name` and `license_link` as the llama2 license is already officially supported on the Hub 🤗 "
+ThankGod,2023-10-06 10:31:19+00:00,comment,NousResearch/Llama-2-13b-hf,"Thankyou! for letting me know that, I will update the PR accordingly. "
+Satya93,2023-08-23 22:38:31+00:00,comment,NousResearch/Llama-2-13b-hf,I would also like to know.
+teknium,2023-08-27 19:54:36+00:00,comment,NousResearch/Llama-2-13b-hf,"> Why did you delete the chat version of Llama2?
+
+Because its terrible and no one should be using it but I just put it back since people complained xD "
+amgadhasan,2023-08-27 21:02:43+00:00,comment,NousResearch/Llama-2-13b-hf,"> > Why did you delete the chat version of Llama2?
+> 
+> Because its terrible and no one should be using it but I just put it back since people complained xD
+
+It's not terrible. It's giving me better responses than nous hermes 2*
+
+*for my specific use case so please don't be mad"
+Satya93,2023-08-29 10:48:09+00:00,comment,NousResearch/Llama-2-13b-hf,"I like it just fine, but you need to prompt it to remove guardrails. I found other finetunes worse for my purpose (translation)-it just seems they lose something afterwards."
+amgadhasan,2023-08-30 16:42:23+00:00,comment,NousResearch/Llama-2-13b-hf,"> I like it just fine, but you need to prompt it to remove guardrails. I found other finetunes worse for my purpose (translation)-it just seems they lose something afterwards.
+
+Yeah the meta's chat version is great if you don't need un-censoring. It's great for summarization and translation of official documents."
+dg-kalle,2023-12-15 02:28:07+00:00,comment,NousResearch/Llama-2-13b-hf,"Why was this reopened? The chat model is available again, so the issue is addressed."
+teknium,2023-08-03 22:07:08+00:00,comment,NousResearch/Llama-2-13b-hf,Merging as TheBloke told to me was the correct setting before
+idormoy,2023-07-26 07:30:02+00:00,comment,NousResearch/Llama-2-13b-hf,"using the last version of HF fixed it
+
+%pip install git+https://github.com/huggingface/transformers"
+emozilla,2023-07-22 01:01:44+00:00,comment,NousResearch/Llama-2-13b-hf,The tokenizer length is set super high so that it never truncates when tokenizing -- it's deceptively named but this is the correct value
+MaziyarPanahi,2024-05-31 22:29:01+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-31 22:29:01+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-30 12:20:16+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-30 12:20:16+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-30 09:38:10+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"Hi @gopi87 
+
+I am making smaller one with higher quality and upload them shortly."
+MaziyarPanahi,2024-06-03 09:46:18+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,You have now smaller models with more accuracy that you can try :) 
+gopi87,2024-06-03 15:13:54+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,Thanks sir
+MaziyarPanahi,2024-05-29 20:34:11+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-29 20:34:12+00:00,comment,MaziyarPanahi/Codestral-22B-v0.1-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-25 19:58:11+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-64k-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-04-25 19:58:11+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-64k-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+danielkorat,2024-05-19 10:41:51+00:00,comment,lmsys/vicuna-7b-v1.3,"Hi @lmzheng 
+Can you please merge this PR for faster model loading?
+Thanks"
+weichiang,2023-11-20 20:37:57+00:00,comment,lmsys/vicuna-7b-v1.3,This is unexpected. does older transformer version work?
+weichiang,2023-11-20 20:38:20+00:00,comment,lmsys/vicuna-7b-v1.3,"also, I'd recommend you to upgrade to our latest v1.5 version"
+lmzheng,2023-07-18 09:56:47+00:00,comment,lmsys/vicuna-7b-v1.3,Thanks for reporting this. It has been fixed.
+SFconvertbot,2024-04-26 12:11:28+00:00,comment,HuggingFaceM4/tiny-random-LlamaForCausalLM,"This is an automated PR created with https://huggingface.co/spaces/safetensors/convert
+
+This new file is equivalent to `pytorch_model.bin` but safe in the sense that
+no arbitrary code can be put into it.
+
+These files also happen to load much faster than their pytorch counterpart:
+https://colab.research.google.com/github/huggingface/notebooks/blob/main/safetensors_doc/en/speed.ipynb
+
+The widgets on your model page will run using this model even if this is not merged
+making sure the file actually works.
+
+If you find any issues: please report here: https://huggingface.co/spaces/safetensors/convert/discussions
+
+Feel free to ignore this PR."
+kcz358,2024-06-07 12:27:44+00:00,comment,lmms-lab/llama3-llava-next-8b,"It is included in the safe tensor
+
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/64bb77e786e7fb5b8a317a43/BAighIBGMSpnHHK_sKjHU.png)
+"
+kcz358,2024-06-07 12:28:30+00:00,comment,lmms-lab/llama3-llava-next-8b,I think you need to first convert the weight so that it can work
+kcz358,2024-05-22 11:40:49+00:00,comment,lmms-lab/llama3-llava-next-8b,You can find some reference code [here](https://github.com/LLaVA-VL/LLaVA-NeXT/blob/inference/docs/LLaVA-NeXT.md)
+mrsteyk,2023-11-18 00:06:52+00:00,comment,ai-forever/rugpt3large_based_on_gpt2,когда-нибудь он добьётся своего
+theaspect,2024-02-06 08:06:12+00:00,comment,ai-forever/rugpt3large_based_on_gpt2,Почему не вмерджить?
+scottyf,2024-04-15 15:08:13+00:00,comment,state-spaces/mamba-130m-hf,"the model is `state-spaces/mamba-130m-hf` but the model card says ""This repository contains the `transfromers` compatible `mamba-2.8b`"". Simple change to reflect the fact that this is (or should be) the `mamba-130m` model."
+nielsr,2024-05-09 20:10:27+00:00,comment,liuhaotian/llava-v1.6-vicuna-13b,HF versions of v1.6 are now available here! https://huggingface.co/collections/llava-hf/llava-next-65f75c4afac77fd37dbbe6cf
+peiyi9979,2024-01-13 12:54:59+00:00,comment,peiyi9979/math-shepherd-mistral-7b-prm,"Hi, this is the tokenizer_class.
+
+https://huggingface.co/mistralai/Mistral-7B-v0.1/blob/main/tokenizer_config.json"
+tongyx361,2024-01-14 03:46:40+00:00,comment,peiyi9979/math-shepherd-mistral-7b-prm,"https://huggingface.co/peiyi9979/math-shepherd-mistral-7b-prm/blob/main/config.json
+
+But the model config shows that the model's architecture is `LlamaForCausalLM`?"
+peiyi9979,2024-01-15 02:56:15+00:00,comment,peiyi9979/math-shepherd-mistral-7b-prm,"Hello, mistral and llama have the same model structure, so I used the script of llama to convert the mistral ckpt from deepseek framework to huggingface framework.
+
+There's no problem with the model type. LlamaForCausalLM is ok.
+
+The bos and eos id does have a bit of a problem though.
+
+It should be 1 and 2, not 100000 and 100001.
+
+ I've changed it.
+
+However, huggingface's generate function should use tokenizer bos and eos id by default, without using 100000 and 100001, so it has no effect. 
+
+"
+tongyx361,2024-01-15 15:01:10+00:00,comment,peiyi9979/math-shepherd-mistral-7b-prm,Thanks for your patient explanation!
+MaziyarPanahi,2024-05-12 20:34:50+00:00,comment,MaziyarPanahi/Yi-1.5-6B-Chat-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-12 20:34:51+00:00,comment,MaziyarPanahi/Yi-1.5-6B-Chat-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-06-06 19:06:30+00:00,comment,MaziyarPanahi/Qwen2-1.5B-Instruct-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-06-06 19:06:34+00:00,comment,MaziyarPanahi/Qwen2-1.5B-Instruct-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+bartowski,2024-04-24 19:03:06+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"Text gen web UI hadn't updated the llamacpp version to support llama 3 until earlier today, I haven't tried it there yet myself but will now
+
+I know that llama.cpp main will produce properly and end properly with this model"
+6346y9uey,2024-04-24 19:35:46+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"Update fixed it, thanks"
+bartowski,2024-04-21 23:02:20+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"I quants run very slowly on Metal so that's probably why you're getting worse performance, I'll add the regular Q2_K version that should run better (but with no imatrix support)"
+rileyretzloff,2024-04-22 00:07:06+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"> I quants run very slowly on Metal so that's probably why you're getting worse performance, I'll add the regular Q2_K version that should run better (but with no imatrix support)
+
+That's unfortunate, and certainly news to me. Anywhere I can read up on why this is?"
+bartowski,2024-04-22 00:50:41+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"*Why* I'm not entirely sure, but you can find the source at the very least here:
+
+https://github.com/ggerganov/llama.cpp/wiki/Feature-matrix"
+Joseph717171,2024-04-23 01:12:48+00:00,comment,lmstudio-community/Meta-Llama-3-70B-Instruct-GGUF,"Use this for your 32GB Apple M1 Max machine:
+```
+sudo sysctl iogpu.wired_limit_mb=28672
+```
+Just keep in mind this will be using ~88% of your RAM (unified-memory)"
+xuefengli,2024-03-19 10:59:35+00:00,comment,GAIR/Abel-7B-002,Apache License 2.0
+beomi,2024-04-04 14:21:25+00:00,comment,beomi/llama-2-ko-7b,"해당 답변이 완전히 동일하기때문에... 별도의 말씀을 추가로 드릴건 없을 것 같습니다.
+현 모델 역시  Instruction tune이 아닌 Pretrain 모델이기 때문입니다."
+hyeongjun,2024-04-04 14:22:39+00:00,comment,beomi/llama-2-ko-7b,네 정말 감사합니다! 
+taehallm,2023-12-04 05:27:16+00:00,comment,beomi/llama-2-ko-7b,12월 4일 현재  Note: this repo is under construction 라고 명시되어 있는데 그래서 오류가 발생하는 건가요? 
+ghchoi,2023-12-20 07:28:11+00:00,comment,beomi/llama-2-ko-7b,https://huggingface.co/beomi/llama-2-ko-7b/discussions/4 이 쓰레드에 공유된 colab 노트북 코드를 보면 사용하신 LlamaTokenizer 가 아니라   AutoTokenizer 로 pretrained tokenizer를 불러왔습니다. 
+beomi,2023-12-27 01:57:37+00:00,comment,beomi/llama-2-ko-7b,"안녕하세요, 본 레포 가이드처럼 ` AutoTokenizer` 를 통해 불러오셔야 합니다."
+beomi,2023-12-27 01:59:55+00:00,comment,beomi/llama-2-ko-7b,"안녕하세요,
+이 레포는 Llama-2-Ko 관련한 레포라, KcBERT 관련해서는 KcBERT 레포( https://github.com/Beomi/KcBERT )에 질문해주세요.
+
+간단히 답변드리면,
+해당 부분은 그저 랜덤이라고 봐야할것 같습니다.
+Pipeline으로 텍스트 분류 모델로 띄우면 LM 분류 head를 붙이게 되는데(nn.Linear), 이 부분은 HF에 올라온 모델에는 없는 부분이라, pipe생성시 랜덤init되는 부분입니다.
+따라서 현재 결과는 단순 랜덤이라고 봐야할 것 같습니다."
+shawn9878,2023-11-22 06:54:11+00:00,comment,beomi/llama-2-ko-7b,Or what kind of instructions or prompts should I use? thank u
+beomi,2023-11-23 05:36:46+00:00,comment,beomi/llama-2-ko-7b,"Hi, since `llama-2-ko` model is pretrained language model, so this is NOT trained to follow the instructions.
+If you're looking for translation-specific model, there is tailored for translation instruction: https://huggingface.co/squarelike/Gugugo-koen-7B-V1.1 
+That model is finetuned on this llama-2-ko base model using several translation datasets."
+shawn9878,2023-11-23 06:03:22+00:00,comment,beomi/llama-2-ko-7b,thank u very much!
+beomi,2023-10-25 09:10:35+00:00,comment,beomi/llama-2-ko-7b,"Umm it foes not supported at this moment. Since HF tokenizer is much feasible option to use,
+there is no plan to support SPM directly 🥲"
+beomi,2023-09-15 15:46:59+00:00,comment,beomi/llama-2-ko-7b,"Polyglot의 토큰이 전혀 섞여있지 않습니다.
+그리고 현 모델의 경우 Base모델로, 파인튜닝해서 사용하시는것을 권장합니다.
+이 모델은 Instruct tuning된 것이 아니라 당연히 Prompt도 존재하지 않습니다."
+beomi,2023-12-27 02:01:00+00:00,comment,beomi/llama-2-ko-7b,"New Korean vocab does not duplicated with original Llama tokenizer since I used `add_new_vocab` method in Tokenizers, which explicitly prevents adding pre-existing vocab."
+beomi,2023-08-01 01:19:30+00:00,comment,beomi/llama-2-ko-7b,"Hi,
+It's glad to see for such a project like this!
+
+I used various corpus from multiple sources,
+which includes KcBERT(https://github.com/Beomi/KcBERT/releases/tag/v2022.3Q) and Korean Wikipedia, and AIHub Text data (https://aihub.or.kr/aihubdata/data/list.do?currMenu=115&topMenu=100&srchDataRealmCode=REALM002) and etc.
+
+I hope this links would help too:
+- Korean Corpus: https://corpus.korean.go.kr/request/reausetMain.do?lang=ko"
+sh0416,2023-10-06 02:05:03+00:00,comment,beomi/llama-2-ko-7b,혹시 AIHub text data의 validation split이나 test split을 학습에 사용하나요?
+beomi,2023-08-01 01:14:21+00:00,comment,beomi/llama-2-ko-7b,"Hi, I created new sentencepiece tokenizer using HF tokenizers library, trained on Korean+English+Code corpus, which from various sources.
+(*the reason why I used ko/en/code is to limit merges)
+Using regex, I extracted Korean only vocab and merges and append them into original Llama-2 vocab.
+
+it is totally unrelated with polyglot-ko models :)"
+beomi,2023-07-26 07:16:07+00:00,comment,beomi/llama-2-ko-7b,"한국어 위키, KcBERT 댓글 데이터 등 다양한 공개 데이터를 비롯해 웹 데이터를 포함해 학습하고 있습니다."
+beomi,2023-07-25 15:12:49+00:00,comment,beomi/llama-2-ko-7b,"백본모델은 두개의 라이센스를 적어주셔야 합니다.
+우선 Llama-2 의 라이센스를 적으셔야 하고, Llama-2-Ko의 라이센스인 MIT 라이센스를 적어주셔야 합니다.
+
+간단히 말하자면, 본 레포의 LICENSE 파일을 해당 배포본에 넣어주시기만 하면 됩니다.
+아래 링크의 파일을 참고해주세요.
+https://huggingface.co/beomi/llama-2-ko-7b/blob/main/LICENSE
+"
+june42,2023-07-25 09:57:17+00:00,comment,beomi/llama-2-ko-7b,This comment has been hidden
+beomi,2023-07-25 09:57:46+00:00,comment,beomi/llama-2-ko-7b,"Thanks for your attention!
+
+it seems like it is working as intended, I've tested on Google Colab using your code but it seems working fine.
+Here's demo colab link: https://colab.research.google.com/drive/1yw2wnge6iHfj7PO5VVDA3jkmliiOqQvd?usp=sharing
+
+what i changed is 1 line of code - since this ckpt is consisted of `BF16`, you'll need to use `torch_dtype=torch.bfloat16` or remove that line at all. (model's config contains about torch_dtype already) but actually it is not critical issue for running the model.
+
+could you explain more detail about your env (python ver, pytorch ver, GPU, nvidia-driver version, cuda version, transformers/tokenizers/accelerate version)?"
+Soroor,2023-07-25 16:30:36+00:00,comment,beomi/llama-2-ko-7b,"Thank you for the prompt response, and thanks for your guidance. 
+It seems that the issue has been solved. 
+I also obtained the same result that you shared:
+Loading checkpoint shards: 100%|██████████| 15/15 [00:26<00:00, 1.77s/it]
+Result: How's the weather today? (오늘 날씨가 어떻습니까?) 10. 오늘 저녁에 뭐 할 겁니까? What are you doing tonight? 11. 몇 시에 퇴근합니까? What time do you get off? 12. 오늘은 몇 시에 출근합니까? What time are you coming to work today? 13. 어디를 가십니까? Where are you headed? 14. 당신은 무슨 일로 전화하셨습니까? May I help you, sir? 15. 이 옷은 어때요? How does this look on me? 16. 차 한 잔 어떻습니까? How about a cup of coffee? 17. 왜 저에게 그렇게 화를 내고 있습니까? Why are you so angry with me? 18. 나는 당신을 사랑합니다. I love you. 19. 나는 당신을 좋아합니다. I like you. 20. 당신은 참 정열적입니다. You...
+
+It's working, but it seems to be generating questions and translations rather than general text generation. 
+Did you train the model to generate similar questions with their translations?
+and I've noticed that it doesn't work well with larger texts and it's just re-write whole the given context again
+
+and here are my current environment details:
+python: 3.8.16
+pytorch: 2.0.1+cu117
+GPU: A100 80G
+Nvidia-Driver Version: 495.29.05
+CUDA Version: 11.5 
+transformers: 4.32.0.dev0
+tokenizers: 0.13.3
+accelerate: 0.20.3
+
+thanks again!"
+beomi,2023-08-01 01:16:20+00:00,comment,beomi/llama-2-ko-7b,"It would be sampling issue.
+How about adding some temperatures and top-p sampling?
+the phenomena shown is NOT intended since I trained the model with shuffled texts."
+lqiao,2023-08-16 06:48:03+00:00,comment,beomi/llama-2-ko-7b,"I saw the same issue as reported by Soroor. I already used temperature 0.7, top-p 0.9. "
+lqiao,2023-08-16 06:50:17+00:00,comment,beomi/llama-2-ko-7b,"
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/64c74d153f3387bcfa50e3e4/69RM_ESOfRBJUj6WF7_lo.png)
+"
+lqiao,2023-08-17 23:45:34+00:00,comment,beomi/llama-2-ko-7b,Is there a good prompt template to use for chat? 
+beomi,2023-07-24 08:26:25+00:00,comment,beomi/llama-2-ko-7b,"If you're using oobabooga webui,
+
+check this out: https://huggingface.co/beomi/llama-2-ko-7b#note-for-oobaboogatext-generation-webui
+
+Llama-2-Ko uses FastTokenizer, and webui uses slow tokenizer as default, and that causes the issue."
+The-matt,2023-10-24 05:21:32+00:00,comment,beomi/llama-2-ko-7b,"@kfkas 안녕하세요 저도 동일한 증상을 겪고있는데 혹시 어떻게 해결하셨을지 여쭤봐도될까요?
+"
+kfkas,2023-10-24 05:54:38+00:00,comment,beomi/llama-2-ko-7b,@The-matt 직접적으로 < / s > 토큰을 텍스트 마지막에 삽입하였습니다.
+The-matt,2023-10-27 02:19:21+00:00,comment,beomi/llama-2-ko-7b,@kfkas 감사합니다!
+beomi,2023-07-22 06:17:28+00:00,comment,beomi/llama-2-ko-7b,"Llama Tokenizer와 동일하게,
+</s>를 써서 학습하면 됩니다 :)"
+kfkas,2023-07-22 11:39:38+00:00,comment,beomi/llama-2-ko-7b,"감사합니다 ""< / s > ""가 안보이네요.."
+beomi,2023-07-22 11:40:24+00:00,comment,beomi/llama-2-ko-7b,"헉 ㅋㅌㅌㅌㅋ 이거 HF 버그인것 같네요
+
+< / s > 입니다 ㅋㅋㅋ"
+jeffreygo,2023-05-04 09:15:02+00:00,comment,openbmb/cpm-ant-10b,Maybe you need to update transformers version. It needs transformers>=4.28.0.
+LaferriereJC,2023-10-22 13:08:17+00:00,comment,openaccess-ai-collective/tiny-mistral,"would this work?
+from transformers import MistralConfig, AutoModelForCausalLM
+
+import torch
+
+import sys
+
+config = MistralConfig(
+hidden_size = 4096,
+intermediate_size = 14336,
+num_hidden_layers = 16,
+num_attention_heads = 32,
+num_key_value_heads = 8,
+)
+
+model = AutoModelForCausalLM.from_config(config, torch_dtype=torch.bfloat16)
+
+print(f'Created a new model with {model.num_parameters()} parameters.')
+
+#this config results in 3.75B parameters.
+with torch.no_grad():
+    for name, param in model.named_parameters():
+        param.data = torch.zeros(size=param.size(), dtype=param.dtype)
+        model.save_pretrained(sys.argv[1])"
+LaferriereJC,2023-10-22 17:31:55+00:00,comment,openaccess-ai-collective/tiny-mistral,"https://www.reddit.com/r/LocalLLaMA/comments/17djecw/mistral_3b/
+https://gist.github.com/thistleknot/48b4551737e72c039abf20b6b913b043"
+Ryu-Sena,2023-10-22 11:04:05+00:00,comment,openaccess-ai-collective/tiny-mistral,"have same question to is this original model build by slicing the original one ? 7b to 500m, btw are this support ggml and gguf conversion ?"
+blazing,2023-11-21 17:20:19+00:00,comment,openaccess-ai-collective/tiny-mistral,"Judging from the result, definitely not trained"
+MaziyarPanahi,2024-06-04 21:06:01+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-v0.10-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-06-04 21:06:02+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-v0.10-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+yuzhen17,2023-09-26 02:48:47+00:00,comment,baichuan-inc/Baichuan-7B,"Use `trust_remote_code=True` when loading model and tokenizer. For example,`tokenizer = AutoTokenizer.from_pretrained(""baichuan-inc/Baichuan-7B"", trust_remote_code=True)`"
+sunandsky,2023-12-18 08:40:28+00:00,comment,baichuan-inc/Baichuan-7B,如果在没有网络的环境下 有什么办法么
+yuzhen17,2023-12-25 03:55:30+00:00,comment,baichuan-inc/Baichuan-7B,download the repo on your laptop and then upload to the server
+LemonadeXyz,2023-12-29 13:29:30+00:00,comment,baichuan-inc/Baichuan-7B,朋友请问你现在解决这个问题了吗？
+J22,2023-07-03 04:33:18+00:00,comment,baichuan-inc/Baichuan-7B,[llama.cpp](https://github.com/ggerganov/llama.cpp) 已支持 baichuan-7b.
+li-plus,2023-09-01 03:35:38+00:00,comment,baichuan-inc/Baichuan-7B,[chatglm.cpp](https://github.com/li-plus/chatglm.cpp/blob/main/chatglm.cpp) 已支持 Baichuan-13B 和 Baichuan-13B-Chat 了
+lupumusic,2023-06-26 07:41:16+00:00,comment,baichuan-inc/Baichuan-7B,#头条创作挑战赛##旅游##我要上 头条##今日头条日签##城市# 显然要清洗掉
+zhangtaochn,2023-06-27 06:50:21+00:00,comment,baichuan-inc/Baichuan-7B,"问了下chatGPT，清洗效果不错：
+这是一条语料，存在需要清洗去掉的内容。请给我清洗后的结果。  #头条创作挑战赛##旅游##我要上 头条##今日头条日签##城市#在我国，有许多省份都有一个别称。比如山东被称为齐鲁大地、河南称为中原之地等等。而今天我们要说的这个地方也有个别名——赣 鄱明珠！它就是位于江西省东北部的上饶市。那么接下来就让我们一起走进这座美丽的江南小城吧~一.地理位置与地形概况1.地理位置上饶地处武夷山脉和怀玉山脉之间，是长江三角洲经济区的重要组成部分。
+回答：
+这是一条语料，需要清洗去掉的内容已经移除。以下是清洗后的结果：
+
+在我国，有许多省份都有一个别称。比如山东被称为齐鲁大地、河南称为中原之地等等。而今天我们要说的这个地方也有个别名——赣鄱明珠！它就是位于江西省东北部的上饶市。那么接下来就让我们一起走进这座美丽的江南小城吧~一.地理位置与地形概况1.地理位置上饶地处武夷山脉和怀玉山脉之间，是长江三角洲经济区的重要组成部分。"
+J22,2023-06-30 09:11:58+00:00,comment,baichuan-inc/Baichuan-7B,"我也发现了。比如：
+
+<img src=""https://iknow-pic.cdn.bcebsosn/....."
+Morning730,2023-07-04 03:33:52+00:00,comment,baichuan-inc/Baichuan-7B,"+1，用了微博的数据，清洗的有点着急了
+Input:请 你是一个现代诗人，请你写一段关于爱情 清晨 的诗
+你是一个现代诗人，请你写一段关于爱情 清晨 的诗
+新浪微博QQ空间
+我喜欢早晨的阳光,因为它能照亮我的心房。"
+zedYYY,2023-07-24 02:14:57+00:00,comment,baichuan-inc/Baichuan-7B,"> +1，用了微博的数据，清洗的有点着急了
+> Input:请 你是一个现代诗人，请你写一段关于爱情 清晨 的诗
+> 你是一个现代诗人，请你写一段关于爱情 清晨 的诗
+> 新浪微博QQ空间
+> 我喜欢早晨的阳光,因为它能照亮我的心房。
+
+这应该是网站的 分享到: 新浪微博、QQ空间的分享链接的文字吧"
+ilangge,2023-07-24 03:39:37+00:00,comment,baichuan-inc/Baichuan-7B,对于语料的生吞活剥
+reedhs,2023-06-24 03:55:19+00:00,comment,baichuan-inc/Baichuan-7B,"Cannot get it work on Colab free version with the code above (8bit), system ran out of memory (12.7GB in total, OOM even with low_cpu_mem_usage =True), can you please look into it? Thanks!"
+ybelkada,2023-06-24 10:36:47+00:00,comment,baichuan-inc/Baichuan-7B,"I believe you need to push the sharded checkpoints somewhere on the hub beforehand otherwise the colab will crash
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained(""baichuan-inc/baichuan-7B"", trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(""baichuan-inc/baichuan-7B"", trust_remote_code=True, torch_dtype=torch.float16)
+model.push_to_hub(""baichuan-7b-sharded"", max_shard_size=""2GB"")
+```
+
+Then use the sharded checkpoints on the Colab"
+yourui,2023-06-21 17:10:33+00:00,comment,baichuan-inc/Baichuan-7B,"`decoder`中还有 `input_layernorm` 和 `post_attention_layernorm`  ，以及在`LM_head`前的`norm`层
+` 7000293376 + 32 * (1 * 4096 * 2) + 1 * 4096= 7000559616`"
+J22,2023-06-25 03:29:05+00:00,comment,baichuan-inc/Baichuan-7B,明白了，谢谢
+tsingcoo,2023-06-29 11:01:52+00:00,comment,baichuan-inc/Baichuan-7B,"> `64000x4096 + 32 (4096x12288 + 4096x4096 + 4096x11008 + 11008x4096 + 4096x11008) +  4096x64000 = 7000293376`
+
+@J22 请问12288是指什么"
+J22,2023-06-29 11:05:10+00:00,comment,baichuan-inc/Baichuan-7B,"12288 是把 $W_q$, $W_k$, $W_v$ 打包到一起的 W_pack。每个的大小都 4096 * 4096."
+tsingcoo,2023-06-29 11:30:28+00:00,comment,baichuan-inc/Baichuan-7B,谢谢
+AoiEugeo,2023-06-21 10:43:05+00:00,comment,baichuan-inc/Baichuan-7B,我也是，你现在解决了吗，我是用的是windows10环境，是win的问题吗
+Ma227,2023-06-25 00:48:11+00:00,comment,baichuan-inc/Baichuan-7B,我用的Linux环境 CentOS7.4 没有解决
+littleevillin,2023-06-28 08:58:56+00:00,comment,baichuan-inc/Baichuan-7B,mac m1 have the same problem，maybe don't have cuda(NVIDIA GPUs)......
+junvey,2023-06-18 22:43:53+00:00,comment,baichuan-inc/Baichuan-7B,This comment has been hidden
+robert680,2023-06-19 03:42:36+00:00,comment,baichuan-inc/Baichuan-7B,你是谁？
+Morning730,2023-07-04 03:09:03+00:00,comment,baichuan-inc/Baichuan-7B,"能load,但是效果和页面上给的即行推理代码效果差异非常大，甚至可以说是崩掉，建议官方出一个web ui的demo，否则自己写的会认为是模型有问题。"
+yiwan,2023-06-16 08:15:58+00:00,comment,baichuan-inc/Baichuan-7B,因为他是文本生成模型，没有对话功能。如果需要，要自己微调。
+jiacheo,2023-06-16 09:44:08+00:00,comment,baichuan-inc/Baichuan-7B,已经有一些LoRa微调发布了
+yiwan,2023-06-16 08:16:35+00:00,comment,baichuan-inc/Baichuan-7B,因为它是文本生成模型，不是对话的。。。对话要自己微调。
+feifeiyechuan,2023-06-16 06:46:06+00:00,comment,baichuan-inc/Baichuan-7B,"我这面还行3.5s左右，但是结果额。。。。
+
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/642ec929894e7cbd2d2a1699/NhX9Hd1OfKU-ZorlUOnJE.png)
+
+"
+Octopath,2023-06-16 06:51:08+00:00,comment,baichuan-inc/Baichuan-7B,"> 我这面还行3.5s左右，但是结果额。。。。
+> 
+> ![image.png](https://cdn-uploads.huggingface.co/production/uploads/642ec929894e7cbd2d2a1699/NhX9Hd1OfKU-ZorlUOnJE.png)
+
+你这个是prompt给的不对，这个和Chatglm不一样，可以看看gpt3.5的prompt是怎么塞的"
+feifeiyechuan,2023-06-16 06:57:45+00:00,comment,baichuan-inc/Baichuan-7B,您是怎么用的？给几个prompt参考一下
+feifeiyechuan,2023-06-16 07:07:53+00:00,comment,baichuan-inc/Baichuan-7B,还有是如何能够输出完整？把已输出结果循环输入吗？
+chaochaoli,2023-06-16 08:02:07+00:00,comment,baichuan-inc/Baichuan-7B,这个不是chat版本，哈哈哈哈
+icelights,2023-06-16 13:26:53+00:00,comment,baichuan-inc/Baichuan-7B,这个不是chat版本，而是语言模型续写的版本吧。
+qiayue,2023-06-16 03:53:29+00:00,comment,baichuan-inc/Baichuan-7B,"chatgpt 等模型专门针对对话进行了微调，目前 baichuan-7B 暂时还没针对对话微调，所以不支持对话。
+但目前模型是有推理能力的。
+模型介绍页面已经举例用法了，如“登鹳雀楼->王之涣\n夜雨寄北->”，给定示例“登鹳雀楼->王之涣”，也就是根据诗歌名称推理作者名称，那么给定问题“夜雨寄北->”，就能够正确推理出来，作者是“李商隐”。
+如果你想实现对话能力，你可以找 gpt 的公开对话数据集，自己对 baichuan-7B 进行微调。"
+qiayue,2023-06-16 03:53:40+00:00,comment,baichuan-inc/Baichuan-7B,This comment has been hidden
+hiyouga,2023-06-16 06:15:02+00:00,comment,baichuan-inc/Baichuan-7B,可以试试非官方的SFT对话模型：https://huggingface.co/hiyouga/baichuan-7b-sft
+pinru,2023-06-16 07:18:37+00:00,comment,baichuan-inc/Baichuan-7B,"这个模型对标的应该是gpt3,而不是chatgpt,是基础模型,他的能力是""续写"",也就是预测后续内容,如果要实现类似chatgpt的效果,需要用对话数据微调"
+itkingtao,2023-06-16 14:31:59+00:00,comment,baichuan-inc/Baichuan-7B,续写应该是GPT2的能力
+s134564,2023-06-18 10:12:42+00:00,comment,baichuan-inc/Baichuan-7B,"
+![image.png](https://cdn-uploads.huggingface.co/production/uploads/6361d57600905b1ffb92827f/ZIqHPzJOHAbBeaYHigZi1.png)
+> 可以试试非官方的SFT对话模型：https://huggingface.co/hiyouga/baichuan-7b-sft
+
+好像还挺顺畅的"
+Aran5530,2023-06-23 04:09:11+00:00,comment,baichuan-inc/Baichuan-7B,"> ![image.png](https://cdn-uploads.huggingface.co/production/uploads/6361d57600905b1ffb92827f/ZIqHPzJOHAbBeaYHigZi1.png)
+> > 可以试试非官方的SFT对话模型：https://huggingface.co/hiyouga/baichuan-7b-sft
+> 
+> 好像还挺顺畅的
+
+您好，请问怎么做到实时对话的界面呢"
+tianniu,2023-06-16 06:37:28+00:00,comment,baichuan-inc/Baichuan-7B,我24G一轮都跑不起来
+yiwan,2023-06-16 07:31:11+00:00,comment,baichuan-inc/Baichuan-7B,This comment has been hidden
+yiwan,2023-06-16 07:40:53+00:00,comment,baichuan-inc/Baichuan-7B,This comment has been hidden
+yiwan,2023-06-16 07:55:47+00:00,comment,baichuan-inc/Baichuan-7B,"~~~
+
+import os
+
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig
+import torch
+
+PRE_TRAINED_MODEL_PATH = ""../model/""
+
+
+# 程序入口
+def main():
+    os.environ[""CUDA_VISIBLE_DEVICES""] = ""2""
+    tokenizer = AutoTokenizer.from_pretrained(PRE_TRAINED_MODEL_PATH, trust_remote_code=True)
+    tokenizer.pad_token_id = 0 if tokenizer.pad_token_id is None else tokenizer.pad_token_id  # set as the <unk> token
+    if tokenizer.pad_token_id == 64000:
+        tokenizer.pad_token_id = 0  # for baichuan model (need fix)
+
+    config = AutoConfig.from_pretrained(PRE_TRAINED_MODEL_PATH, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(PRE_TRAINED_MODEL_PATH, config=config, torch_dtype=torch.float16,
+                                                 trust_remote_code=True, device_map=""auto"", low_cpu_mem_usage=True)
+    with torch.autocast(""cuda""):
+        while True:
+            try:
+                input_txt = input(""user:"")
+                inputs = tokenizer(input_txt, return_tensors='pt')
+                inputs = inputs.to(""cuda:0"")
+                response = model.generate(**inputs, max_new_tokens=64, repetition_penalty=1.1)
+                response = tokenizer.decode(response.cpu()[0], skip_special_tokens=True)
+                print(""bot:"", response)
+                torch.cuda.empty_cache()
+            except Exception as e:
+                print(e)
+                break
+
+
+if __name__ == '__main__':
+    main()
+
+
+~~~
+
+找了一个别人写的代码，改造 了一下，可以跑了。"
+feifeiyechuan,2023-06-16 10:34:00+00:00,comment,baichuan-inc/Baichuan-7B,则会是不是把max_new_tokens改小了
+sharpenb,2024-05-02 02:16:54+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+sharpenb,2024-05-02 02:16:55+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+sharpenb,2024-04-29 13:56:24+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+sharpenb,2024-04-29 13:56:24+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+sharpenb,2024-04-26 07:59:12+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+sharpenb,2024-04-26 07:59:12+00:00,comment,PrunaAI/MaziyarPanahi-Llama-3-8B-Instruct-64k-AWQ-4bit-smashed,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+Sintayew4,2023-11-15 22:01:17+00:00,comment,transfo-xl/transfo-xl-wt103,#3
+dsplog,2023-11-19 02:22:57+00:00,comment,transfo-xl/transfo-xl-wt103,"checked the version history of transformers https://pypi.org/project/transformers/#history
+this issue is not there till transformer version 4.33.3
+
+after that, from v4.34.0 till v4.35.2, we have this issue"
+lysandre,2023-11-28 09:48:43+00:00,comment,transfo-xl/transfo-xl-wt103,"Hello, starting with transformers v4.36, the TransfoXL model and tokenizer will be deprecated due to a security issue.
+
+If version v4.33.3 works for your use-case, we recommend sticking to it. Additionally, we recommend explicitly passing the repo ID (`transfo-xl-wt103`) and revision (`40a186da79458c9f9de846edfaea79c412137f97`) to ensure you use the correct checkpoint."
+sgugger,2022-07-22 08:06:44+00:00,comment,transfo-xl/transfo-xl-wt103,"I think it's better to have something that nothing and that any comments can be addressed in a follow-up PR, so merging this :-)"
+eson,2023-11-25 07:02:55+00:00,comment,baichuan-inc/Baichuan2-7B-Chat,"
+```sh
+$ python predict_baichuan.py
+Traceback (most recent call last):
+  File ""/workspace/baichuan/predict/predict_baichuan.py"", line 14, in <module>
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR, use_fast=False, trust_remote_code=True)
+  File ""/usr/local/lib/python3.10/dist-packages/transformers/models/auto/tokenization_auto.py"", line 755, in from_pretrained
+    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+  File ""/usr/local/lib/python3.10/dist-packages/transformers/tokenization_utils_base.py"", line 2024, in from_pretrained
+    return cls._from_pretrained(
+  File ""/usr/local/lib/python3.10/dist-packages/transformers/tokenization_utils_base.py"", line 2256, in _from_pretrained
+    tokenizer = cls(*init_inputs, **init_kwargs)
+  File ""/root/.cache/huggingface/modules/transformers_modules/tokenization_baichuan.py"", line 75, in __init__
+    super().__init__(
+  File ""/usr/local/lib/python3.10/dist-packages/transformers/tokenization_utils.py"", line 367, in __init__
+    self._add_tokens(
+  File ""/usr/local/lib/python3.10/dist-packages/transformers/tokenization_utils.py"", line 467, in _add_tokens
+    current_vocab = self.get_vocab().copy()
+  File ""/root/.cache/huggingface/modules/transformers_modules/tokenization_baichuan.py"", line 109, in get_vocab
+    vocab = {self.convert_ids_to_tokens(i): i for i in range(self.vocab_size)}
+  File ""/root/.cache/huggingface/modules/transformers_modules/tokenization_baichuan.py"", line 105, in vocab_size
+    return self.sp_model.get_piece_size()
+AttributeError: 'BaichuanTokenizer' object has no attribute 'sp_model'
+
+```
+
+Related issue https://github.com/InternLM/InternLM/pull/419/files"
+eson,2023-11-25 07:03:20+00:00,comment,baichuan-inc/Baichuan2-7B-Chat,This comment has been hidden
+wuzhiying2023,2023-09-06 12:56:38+00:00,comment,baichuan-inc/Baichuan2-7B-Chat,"> 您好，请教NormHead的forward中为什么采用三个分支来生成norm_weight啊，直接norm_weight = nn.functional.normalize(self.weight)会有什么问题吗？另外，forward中存在nn.Parameter会使deepspeed报错，可以避免这个问题吗？感谢！
+
+训练的时候直接norm_weight = nn.functional.normalize(self.weight)是可以的，这么做主要是为了减少计算，提高性能。如果是训练，你可以改成直接normalize的方式也行。"
+JaheimLee,2023-09-06 15:19:36+00:00,comment,baichuan-inc/Baichuan2-7B-Chat,This comment has been hidden
+mrsteyk,2023-11-18 00:06:18+00:00,comment,ai-forever/rugpt3small_based_on_gpt2,когда-нибудь он добьётся своего
+jklj077,2024-01-31 13:17:03+00:00,comment,Qwen/Qwen-14B,Please update the deepspeed package.
+jklj077,2023-12-21 13:31:49+00:00,comment,Qwen/Qwen-14B,It has been fixed in the newest code. Thanks for reporting.
+jklj077,2023-12-21 13:51:48+00:00,comment,Qwen/Qwen-14B,"Which framework were you using to finetine this? Does it do padding using '\n'? We have provided finetuning example at <https://github.com/QwenLM/Qwen>. Please take a look.
+
+For SFT/Chat models, a dialogue pattern needs to be designed. Qwen-Chat uses ChatML (`<|im_start|>user\n...<|im_end|>\n<|im_start|>assistant\n...<|im_end|>\n`) and some uses plaintext, e.g., `\n\nHuman: ...\n\nAssistant: ...`
+The generation is ended by detecting turn boundaries, e.g., `<|im_start|>` and `<|im_end|>` or `\n\nHuman:` and `\n\nAssistant:`."
+CyberTimon,2023-11-27 15:39:02+00:00,comment,Qwen/Qwen-14B,I'm also interested in this
+jklj077,2023-12-21 13:43:37+00:00,comment,Qwen/Qwen-14B,"It is possible. vonjack has made one https://huggingface.co/vonjack/Qwen-LLaMAfied-HFTok-7B-Chat.
+
+But the regex rule for pre-tokenziation is different, so you will need to train the model to adapt.
+
+In fact, the tokenizer is extended from cl100k from `tiktoken`, which also does't have EOS (`end of sentence`). Also, tiktoken is faster than HF's FastTokenizer.
+
+If the framework you use relies only on EOS to work and doesn't offer options such as stop/stop_token_ids/..., you'd better ditch it. It is not designed for generative langauge models."
+jklj077,2023-12-21 13:33:59+00:00,comment,Qwen/Qwen-14B,It is based on cl100k and then extended. It is explained in the technical report: https://arxiv.org/abs/2309.16609
+jasonzjc,2023-11-05 12:08:16+00:00,comment,Qwen/Qwen-14B,我已经在GitHub的readme中看到相关介绍，感谢。
+codefuse-admin,2023-10-26 05:42:30+00:00,comment,Qwen/Qwen-14B,merge
+codefuse-admin,2023-10-26 05:50:13+00:00,comment,Qwen/Qwen-14B,I'm sorry for this. Please skip this
+DewEfresh,2023-09-25 16:27:13+00:00,comment,Qwen/Qwen-14B,I get the same error when trying this model with text generation web ui.   For some reason if you look in the models folder the kernels folder is not present.   
+FangyuLei,2023-09-26 00:53:25+00:00,comment,Qwen/Qwen-14B,I got the same error too......
+jklj077,2023-10-09 10:14:23+00:00,comment,Qwen/Qwen-14B,"Hi all, 
+For huggingface transformers, the import error should be fixed in the latest commit. Please try again.
+text-generation-web-ui has its own logic for downloading files, you may need to manually download certain files. "
+jklj077,2023-09-26 06:28:43+00:00,comment,Qwen/Qwen-14B,请使用该链接 https://dashscope.console.aliyun.com/openModelApply/Qwen-14B-Chat
+jklj077,2023-10-09 10:17:15+00:00,comment,Qwen/Qwen-14B,"Hi, it is possible the files failed to download. Please try to re-initialize the tokenizer (also note that trust_remote_code=True should be set even for local files)."
+RoversX,2023-08-02 07:57:35+00:00,comment,stabilityai/StableBeluga-7B,Already tried to use Qlora fine tuned merge but the file conversion of .safetensors got me confuse 😅
+breadlicker45,2023-08-02 12:54:20+00:00,comment,stabilityai/StableBeluga-7B,"> Already tried to use Qlora fine tuned merge but the file conversion of .safetensors got me confuse 😅
+
+Qlora works for me"
+RoversX,2023-08-03 07:41:47+00:00,comment,stabilityai/StableBeluga-7B,"> > Already tried to use Qlora fine tuned merge but the file conversion of .safetensors got me confuse 😅
+> 
+> Qlora works for me
+
+Thanks, I realized the problem"
+arvind2626,2023-08-13 07:32:03+00:00,comment,stabilityai/StableBeluga-7B,"Hey, I was trying to finetune this model using qLora with this config:
+config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=[""query_key_value""],
+    lora_dropout=0.05,
+    bias=""none"",
+    task_type=""CAUSAL_LM""
+)
+
+model = get_peft_model(model, config)
+print_trainable_parameters(model)
+
+However i ran into the following error:
+ValueError: Target modules ['query_key_value'] not found in the base model. Please check the target modules and try
+again.
+
+I am a complete beginner, can someone please help me out? Thanks!"
+RoversX,2023-08-14 02:26:27+00:00,comment,stabilityai/StableBeluga-7B,"> Hey, I was trying to finetune this model using qLora with this config:
+> config = LoraConfig(
+>     r=16,
+>     lora_alpha=32,
+>     target_modules=[""query_key_value""],
+>     lora_dropout=0.05,
+>     bias=""none"",
+>     task_type=""CAUSAL_LM""
+> )
+> 
+> model = get_peft_model(model, config)
+> print_trainable_parameters(model)
+> 
+> However i ran into the following error:
+> ValueError: Target modules ['query_key_value'] not found in the base model. Please check the target modules and try
+> again.
+> 
+> I am a complete beginner, can someone please help me out? Thanks!
+
+Perhaps consider checking out [Maxime Labonne's Tutorial](https://mlabonne.github.io/blog/posts/Fine_Tune_Your_Own_Llama_2_Model_in_a_Colab_Notebook.html). I found the quality of writing to be superior to that of my own notebook. I attempted to train this model, and it worked. Just replace the model name to this"
+arvind2626,2023-08-15 06:22:08+00:00,comment,stabilityai/StableBeluga-7B,"Hey, thanks for the tutorial, I was able to fine tune my model. However, when I load the model saved on hugging face in text gen webui, it gets loaded on the cpu ram, instead of the gpu ram. Can you pls help?
+https://huggingface.co/arvind2626/Stable-Beluga-arvind this is the fine tune model"
+breadlicker45,2023-08-15 14:25:28+00:00,comment,stabilityai/StableBeluga-7B,This comment has been hidden
+RoversX,2023-08-15 15:36:59+00:00,comment,stabilityai/StableBeluga-7B,"> Hey, thanks for the tutorial, I was able to fine tune my model. However, when I load the model saved on hugging face in text gen webui, it gets loaded on the cpu ram, instead of the gpu ram. Can you pls help?
+> https://huggingface.co/arvind2626/Stable-Beluga-arvind this is the fine tune model
+
+Hi, I tested it on my Colab, and I think it's fine. I am also a beginner here. I'm curious about the dataset format you use. Does it look like this? 
+```
+{""text"": ""### Human: ABABA### Assistant: ABABAB### Human: ABABA### Assistant: ABABAB""}
+```
+Because the quality of the model I fine-tuned isn't very good, and I suspect the problem lies with the format. Anyway, here's the notebook I tested. I believe it works: [notebook](https://huggingface.co/RoversX/Fine-tune-test-temp/blob/main/(Inference)_Fine_tune_Llama_2_in_Google_Colab.ipynb)"
+MaziyarPanahi,2024-05-30 18:07:10+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-v0.9-GGUF,"`create_pr=False` has been passed so PR is automatically merged.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"
+MaziyarPanahi,2024-05-30 18:07:10+00:00,comment,MaziyarPanahi/Llama-3-8B-Instruct-v0.9-GGUF,"Multi-commit is now completed! You can ping the repo owner to review the changes. This PR can now be commented or modified without risking to corrupt it.
+
+_This is a comment posted using the `huggingface_hub` library in the context of a multi-commit. Learn more about multi-commits [in this guide](https://huggingface.co/docs/huggingface_hub/main/guides/upload)._"

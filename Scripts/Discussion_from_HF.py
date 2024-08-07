@@ -5,7 +5,7 @@ from huggingface_hub import get_discussion_details
 
 start_time = time.time()
 
-df = pd.read_csv("Datasets\HF_ByDownload_text-generation05032024.csv").head(100)
+df = pd.read_csv("your model list").head(100)
 
 
 
@@ -63,7 +63,3 @@ print(f"excution time: {elapsed_time:.2f} s")
 df_post = pd.DataFrame(post)
 df_reply = pd.DataFrame(reply)
 df_prc = pd.DataFrame(post_reply_count)
-
-#df_reply.to_csv('replies.csv', index=False)
-#df_post.to_csv('posts.csv', index=False)
-#df_prc.to_csv('post_reply_count.csv', index=False)

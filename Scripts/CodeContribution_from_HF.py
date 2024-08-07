@@ -3,9 +3,9 @@ import pandas as pd
 
 api = HfApi()
 
-df = pd.read_csv("Datasets\HF_ByDownload_text-generation05032024.csv") #You can replace it with your own extracted files
+df = pd.read_csv("your model list") #You can replace it with your own extracted files
 
-with pd.ExcelWriter("you save path", engine='openpyxl') as writer:
+with pd.ExcelWriter("your save path", engine='openpyxl') as writer:
 	# extract the first 100 repo.
 	for j in df['name'].head(100):
 
